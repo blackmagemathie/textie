@@ -6,7 +6,7 @@ namespace setBackground
 
 main:
     lda [$00],y
-    sta !backgroundId
+    sta !textie_background_id
     rts
 
 namespace off

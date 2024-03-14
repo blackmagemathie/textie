@@ -3,18 +3,18 @@ namespace util
 moveCaret:
     ; moves caret within line.
     ; ----------------
-    ; !argMove <- horizontal movement (in px)
+    ; !textie_arg_move <- horizontal movement (in px, signed).
     ; ----------------
-    lda !caretPosScreenX
+    lda !textie_caret_pos_screen_x
     asl #3
-    ora !caretPosCol
+    ora !textie_caret_pos_col
     clc
-    adc !argMove
-    sta !caretPosCol
+    adc !textie_arg_move
+    sta !textie_caret_pos_col
     lsr #3
-    sta !caretPosScreenX
+    sta !textie_caret_pos_screen_x
     lda #$f8
-    trb !caretPosCol
+    trb !textie_caret_pos_col
     rts
 
 namespace off

@@ -10,10 +10,10 @@ main:
     lsr
     lda #$80
     bcc +
-    tsb !lineOptions
+    tsb !textie_line_option
     rts
     +
-    trb !lineOptions
+    trb !textie_line_option
     rts
 
 namespace off

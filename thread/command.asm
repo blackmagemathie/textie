@@ -18,7 +18,7 @@ endmacro
 
 list:
     %indexCommand("end",0,0,1,0)                    ; $00
-    %indexCommand("newLine",1,1,1,0)                ; $01
+    %indexCommand("newLine",0,1,1,0)                ; $01
     %indexCommand("setCharPalette",1,1,0,1)         ; $02
     %indexCommand("setFont",1,1,0,0)                ; $03
     %indexCommand("setSpacePostchar",1,1,0,0)       ; $04

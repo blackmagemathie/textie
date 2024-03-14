@@ -1,9 +1,9 @@
 namespace end
 
-; terminates thread/buffer.
+; terminates thread.
 
 main:
-    stz !threadState
+    stz !textie_thread_state
     rts
 
 namespace off

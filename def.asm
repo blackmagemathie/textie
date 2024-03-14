@@ -1,102 +1,105 @@
-!tilemap                = $413800   ; layer 3 tilemap
-!tilemapPage            = (!tilemap&$01e000)/$2000
-!tilemapAbsolute        = $6000+(!tilemap&$1fff)
-; ----------------
-!canvas                 = $410000   ; canvas to draw text on ($3800 bytes).
-!canvasVirtual          = $600000+((!canvas&$0fffff)*4)
-; ----------------
-!layerBackupGfx         = $404000   ; complete backup of layer 3 ($4000 bytes).
-!layerBackupBehavior    = $35d0     ; backup of layer 3 image behavior set in lm ($13 bytes).
-; ----------------
-!threadData             = $41a000   ; thread data (???×??? bytes).
-!threadSlots            = $01       ; how many threads are supported.
-; ----------------
+; tilemap ($800 bytes)
+    !textie_tilemap      = $413800
+    !textie_tilemap_page = (!textie_tilemap&$01e000)/$2000
+    !textie_tilemap_abs  = $6000+(!textie_tilemap&$1fff)
 
-!threadId               = $3500 ; thread id.
-!threadIndex            = $3501 ; 
+; canvas ($3800 bytes)
+    !textie_canvas      = $410000
+    !textie_canvas_bmp  = $600000+((!textie_canvas&$0fffff)*4)
 
-!threadWait             = $350f ; thread pause time, in frames.
-!threadState            = $3510 ;        state.
-!threadOptions          = $3511 ;        options. format : csbp----
-                                ; c = chain commands.
-                                ; s = chain spaces.
-                                ; b = use message box.
-                                ; p = pause game while thread is active.
-!messagePointerLo       = $3512 ; message pointer, lo.
-!messagePointerHi       = $3513 ;                  hi.
-!messagePointerBk       = $3514 ;                  bank.
-!messagePosGfxLo        = $3515 ; message gfx position, lo.
-!messagePosGfxHi        = $3516 ;                       hi.
-!messagePosScreenX      = $3517 ; message screen position, x.
-!messagePosScreenY      = $3518 ;                          y.
-!messagePosCol          = $3519 ;                          col.
+; layer
+    !textie_layer_backup_gfx = $404000 ; complete backup of layer 3 ($4000 bytes).
+    !textie_layer_backup_lm  = $35d0   ; backup of layer 3 image behavior set in lm ($13 bytes).
 
-!backgroundId           = $351f ; background id.
+; thread
+    !textie_thread_id     = $3500 ; id.
+    !textie_thread_wait   = $350f ; wait timer, in frames.
+    !textie_thread_state  = $3510 ; state.
+    !textie_thread_option = $3511 ; format : cs------
+                                  ; c = chain commands.
+                                  ; s = chain spaces.
 
-!linePosGfxLo           = $3520 ; line gfx position, lo.
-!linePosGfxHi           = $3521 ;                    hi.
-!linePosScreenX         = $3522 ; line screen position, x.
-!linePosScreenY         = $3523 ;                       y.
-!linePosCol             = $3524 ;                       col.
-!lineWidth              = $3525 ; max width of line, in pixels.
-!lineOptions            = $3526 ; line options. format : WwSsb---
-                                ; W = enable word wrap.
-                                ; w = clear if not in a word, set otherwise.
-                                ; S = skip leading spaces
-                                ; s = clear if in leading spaces, set otherwise.
-                                ; b = disable automatic background drawing.
-!caretPosNextFill       = $352b ; next caret position to trigger background fill.
-!caretPosScreenX        = $352c ; caret position, x.
-!caretPosCol            = $352d ;                 col.
-!spacePostchar          = $352e ; space after characters.
-!spaceRegular           = $352f ;       between words.
+; message
+    !textie_message_pointer_lo   = $3512 ; pointer, lo.
+    !textie_message_pointer_hi   = $3513 ;          hi.
+    !textie_message_pointer_bk   = $3514 ;          bank.
+    !textie_message_pos_gfx_lo   = $3515 ; gfx position, lo.
+    !textie_message_pos_gfx_hi   = $3516 ;               hi.
+    !textie_message_pos_screen_x = $3517 ; screen position, x.
+    !textie_message_pos_screen_y = $3518 ;                  y.
+    !textie_message_pos_col      = $3519 ;                  col.
 
-!fontId                 = $3530 ; font id.
-!fontDataBk             = $3531 ;      data bank.
-!fontGfxLo              = $3532 ;      gfx source, lo.
-!fontGfxHi              = $3533 ;                  hi.
-!fontWidthsLo           = $3534 ;      width table source, lo.
-!fontWidthsHi           = $3535 ;                          hi.
-!fontIndicesLo          = $3536 ;      gfx indices source, lo.
-!fontIndicesHi          = $3537 ;                          hi.
-!fontHeight             = $3538 ;      height. ($00-$03 -> 8px-32px)
+; background
+    !textie_background_id  = $351f ; id.
+
+; line
+    !textie_line_pos_gfx_lo   = $3520 ; gfx position, lo.
+    !textie_line_pos_gfx_hi   = $3521 ;               hi.
+    !textie_line_pos_screen_x = $3522 ; screen position, x.
+    !textie_line_pos_screen_y = $3523 ;                  y.
+    !textie_line_pos_col      = $3524 ;                  col.
+    !textie_line_width        = $3525 ; max width, in pixels.
+    !textie_line_option       = $3526 ; format : WwSsb---
+                                      ; W = word wrap.
+                                      ; w = clear if not in a word, set otherwise.
+                                      ; S = skip leading spaces.
+                                      ; s = clear if in leading spaces, set otherwise.
+                                      ; b = disable auto background fill.
+
+; caret
+    !textie_caret_pos_fill     = $352b ; next screen x position to trigger background fill.
+    !textie_caret_pos_screen_x = $352c ; position, x.
+    !textie_caret_pos_col      = $352d ;           col.
+
+; space
+    !textie_space_postchar = $352e ; space after characters (in pixels, signed).
+    !textie_space_regular  = $352f ;       between words (in pixels, signed).
+
+; font
+    !textie_font_id         = $3530 ; id.
+    !textie_font_data_bk    = $3531 ; data pointer, bank.
+    !textie_font_gfx_lo     = $3532 ; pointer to gfx, lo.
+    !textie_font_gfx_hi     = $3533 ;                 hi.
+    !textie_font_widths_lo  = $3534 ;            widths, lo.
+    !textie_font_widths_hi  = $3535 ;                    hi.
+    !textie_font_indices_lo = $3536 ;            gfx indices, lo.
+    !textie_font_indices_hi = $3537 ;                         hi.
+    !textie_font_height     = $3538 ; height (in 8px tiles, -1).
     
-!charId                 = $3540 ; char id.
-!charOptions            = $3541 ;      options. format : tc------
-                                ; t = transpose colors.
-                                ; c = process transparency.
-!charTranspose0         = $3542 ; transposition table for char colors (consecutive bytes).
-!charTranspose1         = $3543 ;
-!charTranspose2         = $3544 ;
-!charTranspose3         = $3545 ;
-!charWidth              = $3546 ; char width.
-!charPalette            = $3547 ;      palette. ($00-$07)
+; char
+    !textie_char_id        = $3540 ; id.
+    !textie_char_option    = $3541 ; format : tc------
+                                   ; t = transpose colors.
+                                   ; c = process transparency.
+    !textie_char_transpose = $3542 ; color transposition table (4 bytes).
+    !textie_char_width     = $3546 ; width.
+    !textie_char_palette   = $3547 ; palette. ($00-$07)
 
-!sfxIdChar              = $3550 ; ???
-!sfxBkChar              = $3551 ; ???
-!sfxIdAdvance           = $3552 ; ???
-!sfxBkAdvance           = $3553 ; ???
-!sfxIdOkay              = $3554 ; ???
-!sfxBkOkay              = $3555 ; ???
-!sfxIdCancel            = $3556 ; ???
-!sfxBkCancel            = $3557 ; ???
-!sfxIdSelect            = $3558 ; ???
-!sfxBkSelect            = $3559 ; ???
-!soundOptions           = $355f ; sound options. format : d--eeeee
-                                ; d = if set, disable all sounds.
-                                ; e = enable sounds, 0 to 4.
-    
-!argPosGfxLo            = $35f0 ; gfx position, lo.
-!argPosGfxHi            = $35f1 ;               hi.
-!argPosCol              = $35f2 ; position, col.
+; sfx
+    !textie_sfx_char_id    = $3550 ; -
+    !textie_sfx_char_bk    = $3551 ; -
+    !textie_sfx_advance_id = $3552 ; -
+    !textie_sfx_advance_bk = $3553 ; -
+    !textie_sfx_okay_id    = $3554 ; -
+    !textie_sfx_okay_bk    = $3555 ; -
+    !textie_sfx_cancel_id  = $3556 ; -
+    !textie_sfx_cancel_bk  = $3557 ; -
+    !textie_sfx_select_id  = $3558 ; -
+    !textie_sfx_select_bk  = $3559 ; -
+    !textie_sfx_option     = $355f ; format : d--eeeee
+                                   ; d = if set, disable all sounds.
+                                   ; e = enable sounds, 0 to 4.
 
-!mapPosLo               = $35f3 ; tilemap position, lo.
-!mapPosHi               = $35f4 ;                   hi.
-!tilePalette            = $35f5 ; tile palette ($00-$07)
-!tilePriority           = $35f6 ; tile priority (0 or non-0)
-!tileCounterLo          = $35f7 ; how many tiles to process, lo.
-!tileCounterHi          = $35f8 ;                            hi.
-!layerQuarter           = $35f9 ; which part of layer 3 to upload tilemap to.
-!argRows                = $35fa ; ???
-!argMove                = $35fb ; ???
-!argWidth               = $35fc ; ???
+; arg
+    !textie_arg_pos_gfx_lo      = $35f0 ; gfx position, lo.
+    !textie_arg_pos_gfx_hi      = $35f1 ;               hi.
+    !textie_arg_pos_col         = $35f2 ; position, col.
+    !textie_arg_tilemap_pos_lo  = $35f3 ; tilemap position, lo.
+    !textie_arg_tilemap_pos_hi  = $35f4 ;                   hi.
+    !textie_arg_tile_priority   = $35f6 ; tile priority (off if zero, on otherwise).
+    !textie_arg_tile_counter_lo = $35f7 ; how many tiles to process, lo.
+    !textie_arg_tile_counter_hi = $35f8 ;                            hi.
+    !textie_arg_quarter         = $35f9 ; which part of layer 3 to upload tilemap to.
+    !textie_arg_rows            = $35fa ; -
+    !textie_arg_move            = $35fb ; -
+    !textie_arg_width           = $35fc ; -

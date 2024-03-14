@@ -2,10 +2,10 @@ init:
     ; initialises thread.
     ; ----------------
     rep #$20                ; setup pointer
-    lda !messagePointerLo   ;
+    lda !textie_message_pointer_lo
     sta $00                 ;
     sep #$20                ;
-    lda !messagePointerBk   ;
+    lda !textie_message_pointer_bk
     sta $02                 ;
     jsr thread_header_read  ; read header
     lda #$00                ; move pointer
@@ -13,12 +13,13 @@ init:
     tya                     ;
     rep #$20                ;
     clc                     ;
-    adc !messagePointerLo   ;
-    sta !messagePointerLo   ;
+    adc !textie_message_pointer_lo
+    sta !textie_message_pointer_lo
     sep #$20                ;
     lda #$c0                ; (test) set thread options
-    sta !threadOptions      ;
-    jsr layer_reserve       ; (test) reserve layer 3
+    sta !textie_thread_option
+    jsr layer_lm_preserve   ; (test) preserve then adjust layer 3 lm settings.
+    jsr layer_lm_set        ;
     lda #$02                ;
-    sta !threadState        ;
+    sta !textie_thread_state
     rts

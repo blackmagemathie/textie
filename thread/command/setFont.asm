@@ -6,7 +6,7 @@ namespace setFont
 
 main:
     lda [$00],y
-    sta !fontId
+    sta !textie_font_id
     php
     jsr font_load
     plp

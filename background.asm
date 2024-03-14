@@ -1,23 +1,23 @@
 namespace background
 
 draw:
-    ; fills canvas with background gfx. (wip)
+    ; fills canvas with background gfx.
     ; > optimise for plain colors (0 to 3)
     ; ----------------
-    ; !argPosGfx (2)   -> canvas position.
-    ; !tileCounter (1) -> how many 8x8 tiles to fill.
-    ; !backgroundId    -> id of background to use.
+    ; !textie_arg_pos_gfx (2)      -> canvas position.
+    ; !textie_arg_tile_counter (1) -> how many 8px tiles to fill.
+    ; !textie_background_id        -> background id.
     ; ----------------
-    lda !tileCounterLo  ; set tile counter
-    bne +               ;
-    rts                 ;
-    +                   ;
-    sta $3100           ;
-    rep #$30            ; get index
-    lda !argPosGfxLo    ;
-    asl #4              ;
-    tay                 ;
-    lda !backgroundId                   ; buffer background gfx
+    lda !textie_arg_tile_counter_lo ; set tile counter
+    bne +                           ;
+    rts                             ;
+    +                               ;
+    sta $3100                       ;
+    rep #$30                        ; get index
+    lda !textie_arg_pos_gfx_lo      ;
+    asl #4                          ;
+    tay                             ;
+    lda !textie_background_id           ; buffer background gfx.
     and #$00ff                          ;
     asl #4                              ;
     tax                                 ;
@@ -31,14 +31,14 @@ draw:
     lda.l backgrounds+$e,x : sta $0e    ;
     tyx                                 ;
     -
-    lda $00 : sta.l !canvas+$0,x        ; fill a tile
-    lda $02 : sta.l !canvas+$2,x        ;
-    lda $04 : sta.l !canvas+$4,x        ;
-    lda $06 : sta.l !canvas+$6,x        ;
-    lda $08 : sta.l !canvas+$8,x        ;
-    lda $0a : sta.l !canvas+$a,x        ;
-    lda $0c : sta.l !canvas+$c,x        ;
-    lda $0e : sta.l !canvas+$e,x        ;
+    lda $00 : sta.l !textie_canvas+$0,x ; fill a tile.
+    lda $02 : sta.l !textie_canvas+$2,x ;
+    lda $04 : sta.l !textie_canvas+$4,x ;
+    lda $06 : sta.l !textie_canvas+$6,x ;
+    lda $08 : sta.l !textie_canvas+$8,x ;
+    lda $0a : sta.l !textie_canvas+$a,x ;
+    lda $0c : sta.l !textie_canvas+$c,x ;
+    lda $0e : sta.l !textie_canvas+$e,x ;
     sep #$20    ; done?
     dec $3100   ;
     beq +       ;

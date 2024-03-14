@@ -2,11 +2,11 @@ namespace setSpacePostchar
 
 ; sets postchar space width.
 ; ----------------
-; arg. 0 <- space width
+; arg. 0 <- space width (in px, signed).
 
 main:
     lda [$00],y
-    sta !spacePostchar
+    sta !textie_space_postchar
     rts
     
 wrap:
