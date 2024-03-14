@@ -146,6 +146,7 @@ normal:
         lda !lineOptions
         and #$08
         bne +
+        lda $01,s
         stz $2250               ; get exact tile count,
         sta $2251               ;
         stz $2252               ;

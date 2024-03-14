@@ -18,7 +18,7 @@ init:
     sep #$20                ;
     lda #$c0                ; (test) set thread options
     sta !threadOptions      ;
-    lda #$a0                ; (test) set line options
+    lda #$a8                ; (test) set line options
     sta !lineOptions        ;
     jsr layer_reserve       ; (test) reserve layer 3
     lda #$02                ;
