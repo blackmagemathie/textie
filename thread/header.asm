@@ -29,6 +29,10 @@ read:
     lda [$00],y             ; get line width
     sta !lineWidth          ;
     iny                     ;
+    lda [$00],y             ; get line options
+    sta !lineOptions        ;
+    and #$a8                ;
+    iny                     ;
     rep #$20                ; get starting gfx pos
     lda [$00],y             ;
     sta !messagePosGfxLo    ;
