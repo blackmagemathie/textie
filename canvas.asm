@@ -8,6 +8,7 @@ upload:
     ; ----------------
     ldy !qutie_index                ; get qutie index.
     lda.b #!qutie_queue_page        ; adjust sas mapping.
+    sta $318f                       ;
     sta $2225                       ;
     lda #$04                        ; set transfer type.
     sta.w !qutie_type,y             ;
@@ -43,6 +44,7 @@ upload:
     adc #$00                        ;
     sta.w !qutie_ram_bk,y           ;
     stz $2225                       ; restore sas mapping.
+    stz $318f                       ;
     inc !qutie_index                ; update qutie index.
     rts
 

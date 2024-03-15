@@ -13,6 +13,7 @@ upload:
     ; ----------------
     ldy !qutie_index                ; get qutie index.
     lda.b #!qutie_queue_page        ; adjust sas mapping.
+    sta $318f                       ;
     sta $2225                       ;
     rep #$20                        ; set initial tilemap pos.
     lda !textie_arg_tilemap_pos_lo  ;
@@ -63,6 +64,7 @@ upload:
     bra -               ; and keep going.
     +           
     stz $2225           ; restore sas mapping.
+    stz $318f           ;
     sty !qutie_index    ; update qutie index.
     rts
 
@@ -101,6 +103,7 @@ layText:
     tsb $04                         ;
     +                               ;
     lda.b #!textie_tilemap_page     ; adjust sas mapping.
+    sta $318f                       ;
     sta $2225                       ;
     .loopRows:
         lda !textie_arg_tile_counter_lo ; get tile counter.
@@ -137,6 +140,7 @@ layText:
         bra .loopRows       ; and keep going.
     .endRows:
     stz $2225   ; restore sas mapping.
+    stz $318f   ;
     sep #$10
     rts
 

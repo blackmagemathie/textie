@@ -72,13 +72,14 @@ vram_transfer:
     ; !textie_arg_pos_gfx (2)      -> gfx position.
     ; !textie_arg_tile_counter (2) -> how many 8x8 tiles to transfer.
     ; ----------------
-    ldy !qutie_index                        ; get index
-    lda.b #!qutie_queue_page                ; adjust sas
+    ldy !qutie_index                        ; get qutie index.
+    lda.b #!qutie_queue_page                ; adjust sas mapping.
+    sta $318f                               ;
     sta $2225                               ;
-    lda #$00                                ; transfer type
+    lda #$00                                ; set transfer type.
     rol                                     ;
     sta.w !qutie_type,y                     ;
-    rep #$20                                ; source
+    rep #$20                                ; set source.
     lda !textie_arg_pos_gfx_lo              ;
     asl #3                                  ;
     pha                                     ;
@@ -91,14 +92,14 @@ vram_transfer:
     sta.w !qutie_ram_hi,y                   ;
     lda.b #(!textie_layer_backup_gfx>>16)   ;
     sta.w !qutie_ram_bk,y                   ;
-    rep #$20                                ; transfer size
+    rep #$20                                ; set transfer size.
     lda !textie_arg_tile_counter_lo         ;
     asl #4                                  ;
     sep #$20                                ;
     sta.w !qutie_size_lo,y                  ;
     xba                                     ;
     sta.w !qutie_size_hi,y                  ;
-    rep #$20                                ; vram location
+    rep #$20                                ; set vram pos.
     pla                                     ;
     clc                                     ;
     adc #$4000                              ;
@@ -106,8 +107,9 @@ vram_transfer:
     sta.w !qutie_gp_lo,y                    ;
     xba                                     ;
     sta.w !qutie_gp_hi,y                    ;
-    stz $2225                               ; restore sas
-    inc !qutie_index                        ; next queue index
+    stz $2225                               ; restore sas mapping.
+    stz $318f                               ;
+    inc !qutie_index                        ; update qutie index.
     rts
 
 namespace off
