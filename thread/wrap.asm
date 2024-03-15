@@ -20,37 +20,36 @@ testWord:
     stz $03                     ; clear width.
     .loop:
         jsr .compare    ; fits?
-        bcs .end        ; if no, end
-        lda [$00]       ; else, continue
-        beq .cmd        ;
-        cmp #$ff        ;
-        beq .compare    ;
+        bcs .end        ; if no, end.
+        lda [$00]       ; else, keep going.
+        beq .cmd        ; command, space or char?
+        cmp #$ff        ; if space,
+        beq .compare    ; test width one last time.
         bra .char       ;
     .compare:
         lda $03
         cmp !textie_arg_width
-        bne +
+        bne .end
         clc
-        +
      .end:
         rts
     ; ----
     .cmd:
-        ldy #$01                        ; get command index
+        ldy #$01                        ; get command index.
         lda [$00],y                     ;
         asl #3                          ;
         tax                             ;
         lda.w thread_command_list+3,x   ; ignore?
         bit #$04                        ;
-        bne +                           ;
+        bne +                           ; if no,
         bit #$02                        ; jump to final comparison?
-        bne .compare                    ;
-        iny                             ; execute command (wrap routine)
+        bne .compare                    ; if no,
+        iny                             ; execute command (wrap routine).
         phx                             ;
         jsr.w (thread_command_list+4,x) ;
         plx                             ;
         +
-        lda #$00                        ; move pointer
+        lda #$00                        ; move pointer.
         xba                             ;
         lda.w thread_command_list+2,x   ;
         inc #2                          ;
@@ -62,14 +61,14 @@ testWord:
         bra .loop
     ; ----
     .char:
-        tay         ; add char width and postchar space
+        tay         ; add char width and postchar space.
         lda [$04],y ;
         clc         ;
         adc $03     ;
         clc         ;
         adc $07     ;
         sta $03     ;
-        rep #$20    ; move pointer
+        rep #$20    ; move pointer.
         inc $00     ;
         sep #$20    ;
         bra .loop

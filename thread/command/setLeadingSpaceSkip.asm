@@ -1,6 +1,6 @@
 namespace setLeadingSpaceSkip
 
-; de/activates leading space skip.
+; toggles skipping of leading spaces.
 ; ----------------
 ; arg. 0 <- format : -------o
 ;           o = on/off

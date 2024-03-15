@@ -1,10 +1,10 @@
 normal:
-    ; executes thread normally. (wip)
+    ; executes thread normally.
     ; ----------------
-    lda #$80    ; setup bitmap mode
+    lda #$80    ; set bitmap mode.
     sta $223f   ;
     .readChar:
-    rep #$20                        ; setup pointer
+    rep #$20                        ; get message pointer.
     lda !textie_message_pointer_lo  ;
     sta $00                         ;
     sep #$20                        ;
@@ -15,112 +15,112 @@ normal:
     cmp #$ff                        ;
     beq .space                      ;
     bra .char                       ;
-    ; ----------------
+    ; ----
     .cmd:
-        ldy #$01                        ; get command index
+        ldy #$01                        ; get command index into x.
         lda [$00],y                     ;
         asl #3                          ;
         tax                             ;
-        iny                             ; execute command (main routine)
+        iny                             ; execute command (main routine).
         phx                             ;
         jsr (thread_command_list,x)     ;
         plx                             ;
-        lda #$00                        ; move pointer
+        lda #$00                        ; move message pointer.
         xba                             ;
         lda.w thread_command_list+2,x   ;
         inc #2                          ;
         rep #$20                        ;
         clc                             ;
-        adc !textie_message_pointer_lo
-        sta !textie_message_pointer_lo
+        adc !textie_message_pointer_lo  ;
+        sta !textie_message_pointer_lo  ;
         sep #$20                        ;
-        lda !textie_thread_option       ; if chaining enabled,
-        bpl +                           ;
-        lda.w thread_command_list+3,x   ; and command is chainable,
-        bit #$01                        ;
-        bne .readChar                   ; keep processing
-        +                               ;
+        lda !textie_thread_option       ; command chaining enabled?
+        bpl +                           ; if yes,
+        lda.w thread_command_list+3,x   ; command chainable?
+        bit #$01                        ; if yes,
+        bne .readChar                   ; keep going.
+        +
         rts
-    ; ----------------
+    ; ----
     .space:
         lda !textie_line_option         ; skip leading spaces?
-        bit #$20                        ;
+        bit #$20                        ; if yes, 
         beq +                           ;
-        bit #$10                        ; if yes, and in leading spaces,
-        beq ++                          ; skip
+        bit #$10                        ; in leading spaces?
+        beq ++                          ; if yes, skip caret movement.
         +                               ;
-            
         lda !textie_space_regular       ; move caret.
         sta !textie_arg_move            ;
         jsr thread_util_moveCaret       ;
-            
-        lda !textie_line_option         ; words wrap enabled?
-        bpl +                           ;
-        lda !textie_line_pos_screen_x   ; get line end pos
+        lda !textie_line_option         ; word wrap enabled?
+        bpl +                           ; if yes,
+        lda !textie_line_pos_screen_x   ; get line end pos,
         asl #3                          ;
         ora !textie_line_pos_col        ;
         clc                             ;
         adc !textie_line_width          ;
         sta $00                         ;
-        lda !textie_caret_pos_screen_x  ; get caret pos
+        lda !textie_caret_pos_screen_x  ; get caret pos,
         asl #3                          ;
         ora !textie_caret_pos_col       ;
-        cmp $00                         ; if too far,
-        bcc +                           ;
-        jsr thread_command_newLine_main ; start new line
+        cmp $00                         ; and check if exceeded.
+        bcc +                           ; if yes,
+        jsr thread_command_newLine_main ; start new line.
         +                               ;
         ++  
-        rep #$20                        ; move pointer
-        inc !textie_message_pointer_lo
+        rep #$20                        ; move message pointer.
+        inc !textie_message_pointer_lo  ;
         sep #$20                        ;
-        lda #$40                        ; clear word flag
+        lda #$40                        ; clear word flag.
         trb !textie_line_option         ;
-        lda !textie_thread_option       ; if chaining enabled,
+        lda !textie_thread_option       ; space chaining enabled?
         and #$40                        ;
-        beq +                           ;
-        jmp .readChar                   ; keep processing
-        +                               ;
+        beq +                           ; if yes,
+        jmp .readChar                   ; keep going.
+        +
         rts
-    ; ----------------
+    ; ----
     .char:
+        ; get and test char width.
         sta !textie_char_id             ; set char id.
         jsr char_getWidth               ; get char width.
         bne +                           ; zero? if yes,
-        rep #$20                        ; move pointer,
+        rep #$20                        ; move message pointer,
         inc !textie_message_pointer_lo  ;
         sep #$20                        ;
         rts                             ; and return early.
         +                               ;
         
-        lda !textie_line_option ; word wrap enabled?
-        bpl +                   ; 
-        bit #$40                ; word flag clear?
-        bne +                   ;
-        
-        lda !textie_caret_pos_screen_x  ; get caret pos
+        ; process word wrap.
+        lda !textie_line_option         ; word wrap enabled?
+        bpl +                           ; if yes,
+        bit #$40                        ; word flag clear?
+        bne +                           ; if yes,
+        lda !textie_caret_pos_screen_x  ; get caret pos,
         asl #3                          ;
         ora !textie_caret_pos_col       ;
         sta $03                         ;
-        lda !textie_line_pos_screen_x   ; get line end pos
+        lda !textie_line_pos_screen_x   ; get line end pos,
         asl #3                          ;
         ora !textie_line_pos_col        ;
         clc                             ;
         adc !textie_line_width          ;
-        sec                             ; get max width
+        sec                             ; get max width,
         sbc $03                         ;
         sta !textie_arg_width           ;
-        rep #$20                        ; get pointer
+        rep #$20                        ; get message pointer,
         lda !textie_message_pointer_lo  ;
         sta $00                         ;
         sep #$20                        ;
         lda !textie_message_pointer_bk  ;
         sta $02                         ;
-        jsr thread_wrap_testWord        ; test word
-        bcc +
-        jsr thread_command_newLine_main
+        jsr thread_wrap_testWord        ; and test word.
+        bcc +                           ; fits? if no,
+        jsr thread_command_newLine_main ; start new line.
         +
         
-        lda !textie_caret_pos_screen_x  ; move caret in theory
+        ; process auto background fill.
+        lda !textie_caret_pos_screen_x  ; simulate caret movement.
         asl #3                          ;
         ora !textie_caret_pos_col       ;
         clc                             ;
@@ -132,8 +132,8 @@ normal:
         trb $01                         ;
         lda $00                         ; before next fill?
         cmp !textie_caret_pos_fill      ;
-        bcc ..noFill                    ;
-        lda $01                         ; if no, get number of tiles to fill
+        bcc ++                          ; if no,
+        lda $01                         ; count tiles to fill.
         beq +                           ;
         lda #$01                        ;
         +                               ;
@@ -141,11 +141,11 @@ normal:
         adc $00                         ;
         sec                             ;
         sbc !textie_caret_pos_fill      ;
-        beq ..noFill                    ; if zero, don't fill
-        pha                             ; preserve number.
-        lda !textie_line_option         ; auto background drawing disabled?
-        and #$08                        ; if yes,
-        bne +                           ; skip most of what follows.
+        beq ++                          ; if zero, don't fill.
+        pha                             ; else, preserve number,
+        lda !textie_line_option         ; auto background drawing enabled?
+        and #$08                        ;
+        bne +                           ; if yes,
         lda $01,s                       ; get exact tile count,
         stz $2250                       ;
         sta $2251                       ;
@@ -173,15 +173,16 @@ normal:
         adc $2306                       ;
         sta !textie_arg_pos_gfx_lo      ;
         sep #$20                        ;
-        jsr background_draw             ; draw bg,
+        jsr background_draw             ; and fill background.
         +                               ;
-        pla                             ; and move next fill trigger
+        pla                             ; move next fill trigger.
         clc                             ;
         adc !textie_caret_pos_fill      ;
         sta !textie_caret_pos_fill      ;
-        ..noFill:
+        ++
 
-        stz $2250                       ; draw char
+        ; draw char.
+        stz $2250                       ; get canvas pos,
         lda !textie_caret_pos_screen_x  ;
         sec                             ;
         sbc !textie_line_pos_screen_x   ;
@@ -199,9 +200,10 @@ normal:
         sep #$20                        ;
         lda !textie_caret_pos_col       ;
         sta !textie_arg_pos_col         ;
-        jsr char_draw                   ;
+        jsr char_draw                   ; and draw char.
         
-        lda !textie_caret_pos_col       ; upload gfx
+        ; upload to canvas.
+        lda !textie_caret_pos_col       ; get tile count,
         and #$07                        ;
         clc                             ;
         adc !textie_char_width          ;
@@ -226,9 +228,10 @@ normal:
         lda $2306                       ;
         sta !textie_arg_tile_counter_lo ;
         sep #$20                        ;
-        jsr canvas_upload               ;
-
-        rep #$20                        ; write to tilemap
+        jsr canvas_upload               ; and upload canvas to vram.
+        
+        ; lay text into tilemap.
+        rep #$20                        ; get tilemap pos,
         lda !textie_line_pos_screen_y-1 ;
         and #$ff00                      ;
         lsr #3                          ;
@@ -238,25 +241,29 @@ normal:
         sta !textie_arg_tilemap_pos_lo  ;
         sep #$20                        ;
         lda $00                         ;
-        sta !textie_arg_tile_counter_lo ;
-        sta !textie_arg_tile_priority   ;
-        jsr tilemap_layText             ;
-
-        lda #$03                ; upload tilemap
+        sta !textie_arg_tile_counter_lo ; get tile count,
+        sta !textie_arg_tile_priority   ; set priority,
+        jsr tilemap_layText             ; and lay text into tilemap.
+        
+        ; upload tilemap.
+        lda #$03                ; set quarter to upload to,
         sta !textie_arg_quarter ;
-        lda !textie_font_height ;
+        lda !textie_font_height ; get row count,
         inc                     ;
         sta !textie_arg_rows    ;
-        jsr tilemap_upload      ;
-
-        lda !textie_char_width          ; move caret
-        clc                             ;
+        jsr tilemap_upload      ; and upload tilemap to vram.
+        
+        ; move caret.
+        lda !textie_char_width          ; get char width,
+        clc                             ; add postchar space,
         adc !textie_space_postchar      ;
-        sta !textie_arg_move            ;
-        jsr thread_util_moveCaret       ;
-        lda #$50                        ; set word flag, and out-of-leading-spaces flag
+        sta !textie_arg_move            ; set caret movement,
+        jsr thread_util_moveCaret       ; and move caret.
+        
+        ; finish
+        lda #$50                        ; set word flag, and leading space flag.
         tsb !textie_line_option         ;
-        rep #$20                        ; move pointer
+        rep #$20                        ; move message pointer.
         inc !textie_message_pointer_lo  ;
         sep #$20                        ;
         

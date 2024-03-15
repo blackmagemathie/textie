@@ -25,23 +25,23 @@ lm_set:
     ; adjusts layer 3 lm settings for messages.
     ; ----------------
     rep #$20
-    lda #$0100                  ; set position
+    lda #$0100                  ; set position.
     sta $22                     ;
     dec                         ;
     sta $24                     ;
-    stz $1458|!addr             ; set speed
+    stz $1458|!addr             ; set speed.
     stz $145a|!addr             ;
-    stz $145c|!addr             ; kill pos x update
+    stz $145c|!addr             ; kill pos x update.
     sep #$20                    ;
-    lda #$04 : trb $40          ; kill translucency
-    lda #$80 : trb $5b          ; kill tide interaction
-    stz $145f|!addr             ; kill scrolling settings
-    lda #$07 : sta $145e|!addr  ; adjust layer settings
-    stz $1be3|!addr             ; kill tides
+    lda #$04 : trb $40          ; kill translucency.
+    lda #$80 : trb $5b          ; kill tide interaction.
+    stz $145f|!addr             ; kill scrolling settings.
+    lda #$07 : sta $145e|!addr  ; adjust layer settings.
+    stz $1be3|!addr             ; kill tides.
     stz $1403|!addr             ;
-    stz $1460|!addr             ; adjust layer direction
-    stz $13d5|!addr             ; kill screen scroll
-    lda #$08 : tsb $3e          ; adjust layer priority
+    stz $1460|!addr             ; adjust layer direction.
+    stz $13d5|!addr             ; kill screen scroll.
+    lda #$08 : tsb $3e          ; set layer 3 priority.
     rts
 
 lm_restore:

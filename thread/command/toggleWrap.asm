@@ -1,6 +1,6 @@
 namespace toggleWrap
 
-; de/activates word wrap.
+; toggles word wrap.
 ; ----------------
 ; arg. 0 <- format : -------o
 ;           o = on/off

@@ -6,7 +6,7 @@ namespace state
         dw normal
         dw exit
         
-    incsrc "state/none.asm"
+    none: rts
     incsrc "state/init.asm"
     incsrc "state/normal.asm"
     incsrc "state/exit.asm"

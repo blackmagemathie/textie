@@ -8,12 +8,12 @@ draw:
     ; !textie_arg_tile_counter (1) -> how many 8px tiles to fill.
     ; !textie_background_id        -> background id.
     ; ----------------
-    lda !textie_arg_tile_counter_lo ; set tile counter
-    bne +                           ;
-    rts                             ;
+    lda !textie_arg_tile_counter_lo ; tile count zero?
+    bne +                           ; if yes,
+    rts                             ; return.
     +                               ;
-    sta $3100                       ;
-    rep #$30                        ; get index
+    sta $3100                       ; else, set counter.
+    rep #$30                        ; get index to bg gfx.
     lda !textie_arg_pos_gfx_lo      ;
     asl #4                          ;
     tay                             ;
@@ -41,15 +41,15 @@ draw:
     lda $0e : sta.l !textie_canvas+$e,x ;
     sep #$20    ; done?
     dec $3100   ;
-    beq +       ;
-    rep #$20    ; if not, increase index,
+    beq +       ; if not,
+    rep #$20    ; increase index,
     txa         ;
     clc         ;
     adc #$0010  ;
     tax         ;
     bra -       ; and keep going.
-    +           ;
-    sep #$10    ;
+    +
+    sep #$10
     rts
-    
+
 namespace off

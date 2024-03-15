@@ -1,5 +1,5 @@
 exit:
     ; terminates thread.
     ; ----------------
-    stz !textie_thread_state    ; update thread state.
+    stz !textie_thread_state
     rts
