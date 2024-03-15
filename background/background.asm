@@ -17,19 +17,19 @@ draw:
     lda !textie_arg_pos_gfx_lo      ;
     asl #4                          ;
     tay                             ;
-    lda !textie_background_id           ; buffer background gfx.
-    and #$00ff                          ;
-    asl #4                              ;
-    tax                                 ;
-    lda.l backgrounds+$0,x : sta $00    ;
-    lda.l backgrounds+$2,x : sta $02    ;
-    lda.l backgrounds+$4,x : sta $04    ;
-    lda.l backgrounds+$6,x : sta $06    ;
-    lda.l backgrounds+$8,x : sta $08    ;
-    lda.l backgrounds+$a,x : sta $0a    ;
-    lda.l backgrounds+$c,x : sta $0c    ;
-    lda.l backgrounds+$e,x : sta $0e    ;
-    tyx                                 ;
+    lda !textie_background_id               ; buffer background gfx.
+    and #$00ff                              ;
+    asl #4                                  ;
+    tax                                     ;
+    lda.l background_data+$0,x : sta $00    ;
+    lda.l background_data+$2,x : sta $02    ;
+    lda.l background_data+$4,x : sta $04    ;
+    lda.l background_data+$6,x : sta $06    ;
+    lda.l background_data+$8,x : sta $08    ;
+    lda.l background_data+$a,x : sta $0a    ;
+    lda.l background_data+$c,x : sta $0c    ;
+    lda.l background_data+$e,x : sta $0e    ;
+    tyx                                     ;
     -
     lda $00 : sta.l !textie_canvas+$0,x ; fill a tile.
     lda $02 : sta.l !textie_canvas+$2,x ;
