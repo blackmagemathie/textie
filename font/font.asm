@@ -11,16 +11,16 @@ load:
     and #$00ff          ;
     asl #3              ;
     tax                 ;
-    lda.l fonts_index+$01,x     ; get pointer to widths.
+    lda.l font_data_index+$01,x ; get pointer to widths.
     sta !textie_font_widths_lo  ;
-    lda.l fonts_index+$03,x     ; get pointer to gfx.
+    lda.l font_data_index+$03,x ; get pointer to gfx.
     sta !textie_font_gfx_lo     ;
-    lda.l fonts_index+$05,x     ; get pointer to gfx indices.
+    lda.l font_data_index+$05,x ; get pointer to gfx indices.
     sta !textie_font_indices_lo ;
     sep #$20                    ;
-    lda.l fonts_index+$00,x     ; get data pointer bank.
+    lda.l font_data_index+$00,x ; get data pointer bank.
     sta !textie_font_data_bk    ;
-    lda.l fonts_index+$07,x     ; get height.
+    lda.l font_data_index+$07,x ; get height.
     sta !textie_font_height     ;
     sep #$10    ;
     plx         ; restore x.

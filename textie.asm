@@ -7,14 +7,14 @@ freedata
     backgrounds:
     incbin "backgrounds.bin"
     
-    incsrc "fonts/fonts.asm"
+    incsrc "font/list.asm"
 
 freecode
 
     namespace nested on
     
     incsrc "layer.asm"
-    incsrc "font.asm"
+    incsrc "font/font.asm"
     incsrc "background.asm"
     incsrc "char.asm"
     incsrc "canvas.asm"

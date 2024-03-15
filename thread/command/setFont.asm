@@ -18,10 +18,10 @@ wrap:
     and #$00ff
     asl #3
     tax
-    lda.l fonts_index+$01,x
+    lda.l font_data_index+$01,x
     sta $04
     sep #$20
-    lda.l fonts_index+$00,x
+    lda.l font_data_index+$00,x
     sta $06
     sep #$10
     rts

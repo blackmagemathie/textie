@@ -1,4 +1,4 @@
-namespace fonts
+namespace font_data
 
     ; indexes a font.
     ; ----------------
@@ -6,10 +6,10 @@ namespace fonts
     ; height <- font height in 8px tiles, minus 1.
     ; ----------------
     macro indexFont(name,height)
-        db data_<name>>>16
-        dw data_<name>_widths
-        dw data_<name>_gfx
-        dw data_<name>_indices
+        db <name>>>16
+        dw <name>_widths
+        dw <name>_gfx
+        dw <name>_indices
         db <height>
     endmacro
     
@@ -19,10 +19,10 @@ namespace fonts
     ; ----------------
     macro insertFont(name)
         freedata
-        .<name>:
-            ..widths:  incbin "<name>/widths.bin"
-            ..gfx:     incbin "<name>/gfx.bin"
-            ..indices: incbin "<name>/indices.bin"
+        <name>:
+            .widths:  incbin "item/<name>/widths.bin"
+            .gfx:     incbin "item/<name>/gfx.bin"
+            .indices: incbin "item/<name>/indices.bin"
     endmacro
 
     ; INDEX+INSERT FONTS BELOW
@@ -30,7 +30,6 @@ namespace fonts
     index:
         %indexFont("fontie",0)
     
-    data:
-        %insertFont("fontie")
+    %insertFont("fontie")
         
 namespace off
