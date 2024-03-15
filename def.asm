@@ -29,6 +29,12 @@
     !textie_message_pos_screen_y = $3518 ;                  y.
     !textie_message_pos_col      = $3519 ;                  col.
 
+; header
+    !textie_header_pointer_lo   = $351b ; pointer, lo.
+    !textie_header_pointer_hi   = $351c ;          hi.
+    !textie_header_pointer_bk   = $351d ;          bank.
+    !textie_header_id           = $351e ; format id.
+    
 ; background
     !textie_background_id  = $351f ; id.
 

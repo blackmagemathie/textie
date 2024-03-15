@@ -21,3 +21,4 @@ freecode
     incsrc "tilemap.asm"
     
     incsrc "thread/thread.asm"
+    incsrc "header/header.asm"

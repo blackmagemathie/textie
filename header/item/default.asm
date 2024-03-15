@@ -1,10 +1,4 @@
-namespace header
-
-read:
-    ; reads a message header.
-    ; ----------------
-    ; $00-$02 <- pointer to header
-    ; ----------------
+default:
     ldy #$00                            ; set y.
     lda [$00],y                         ; get font.
     sta !textie_font_id                 ;
@@ -56,5 +50,3 @@ read:
     lda [$00],y : sta !textie_char_transpose+2 : iny ;
     lda [$00],y : sta !textie_char_transpose+3 : iny ;
     rts
-
-namespace off

@@ -1,7 +1,6 @@
 namespace thread
 
 incsrc "util.asm"
-incsrc "header.asm"
 incsrc "wrap.asm"
 incsrc "command.asm"
 incsrc "state.asm"
