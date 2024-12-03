@@ -15,14 +15,14 @@ upload:
     lda #$02                        ; set ccdma settings.
     sta.w !qutie_cc_params,y        ;
     rep #$20                        ; set transfer size.
-    lda !textie_arg_tile_counter_lo ;
+    lda !textie_arg_tile_counter ;
     asl #4                          ;
     sep #$20                        ;
     sta.w !qutie_size_lo,y          ;
     xba                             ;
     sta.w !qutie_size_hi,y          ;
     rep #$20                        ; set vram location
-    lda !textie_arg_pos_gfx_lo      ;
+    lda !textie_arg_pos_gfx      ;
     asl #3                          ;
     pha                             ;
     clc                             ;

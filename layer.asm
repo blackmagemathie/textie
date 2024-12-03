@@ -80,7 +80,7 @@ vram_transfer:
     rol                                     ;
     sta.w !qutie_type,y                     ;
     rep #$20                                ; set source.
-    lda !textie_arg_pos_gfx_lo              ;
+    lda !textie_arg_pos_gfx              ;
     asl #3                                  ;
     pha                                     ;
     asl                                     ;
@@ -93,7 +93,7 @@ vram_transfer:
     lda.b #(!textie_layer_backup_gfx>>16)   ;
     sta.w !qutie_ram_bk,y                   ;
     rep #$20                                ; set transfer size.
-    lda !textie_arg_tile_counter_lo         ;
+    lda !textie_arg_tile_counter         ;
     asl #4                                  ;
     sep #$20                                ;
     sta.w !qutie_size_lo,y                  ;

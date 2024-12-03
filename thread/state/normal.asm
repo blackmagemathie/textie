@@ -5,10 +5,10 @@ normal:
     sta $223f   ;
     .readChar:
     rep #$20                        ; get message pointer.
-    lda !textie_message_pointer_lo  ;
+    lda !textie_message_pointer     ;
     sta $00                         ;
     sep #$20                        ;
-    lda !textie_message_pointer_bk  ;
+    lda !textie_message_pointer+2   ;
     sta $02                         ;
     lda [$00]                       ; command, space or char?
     beq .cmd                        ;
@@ -31,8 +31,8 @@ normal:
         inc #2                          ;
         rep #$20                        ;
         clc                             ;
-        adc !textie_message_pointer_lo  ;
-        sta !textie_message_pointer_lo  ;
+        adc !textie_message_pointer     ;
+        sta !textie_message_pointer     ;
         sep #$20                        ;
         lda !textie_thread_option       ; command chaining enabled?
         bpl +                           ; if yes,
@@ -69,7 +69,7 @@ normal:
         +                               ;
         ++  
         rep #$20                        ; move message pointer.
-        inc !textie_message_pointer_lo  ;
+        inc !textie_message_pointer     ;
         sep #$20                        ;
         lda #$40                        ; clear word flag.
         trb !textie_line_option         ;
@@ -86,7 +86,7 @@ normal:
         jsr char_getWidth               ; get char width.
         bne +                           ; zero? if yes,
         rep #$20                        ; move message pointer,
-        inc !textie_message_pointer_lo  ;
+        inc !textie_message_pointer     ;
         sep #$20                        ;
         rts                             ; and return early.
         +                               ;
@@ -109,10 +109,10 @@ normal:
         sbc $03                         ;
         sta !textie_arg_width           ;
         rep #$20                        ; get message pointer,
-        lda !textie_message_pointer_lo  ;
+        lda !textie_message_pointer     ;
         sta $00                         ;
         sep #$20                        ;
-        lda !textie_message_pointer_bk  ;
+        lda !textie_message_pointer+2   ;
         sta $02                         ;
         jsr thread_wrap_testWord        ; and test word.
         bcc +                           ; fits? if no,
@@ -156,7 +156,7 @@ normal:
         stz $2254                       ;
         nop #3                          ;
         lda $2306                       ;
-        sta !textie_arg_tile_counter_lo ;
+        sta !textie_arg_tile_counter ;
         stz $2250                       ; get gfx pos,
         lda !textie_caret_pos_fill      ;
         sec                             ;
@@ -168,10 +168,10 @@ normal:
         sta $2253                       ;
         stz $2254                       ;
         rep #$20                        ;
-        lda !textie_line_pos_gfx_lo     ;
+        lda !textie_line_pos_gfx        ;
         clc                             ;
         adc $2306                       ;
-        sta !textie_arg_pos_gfx_lo      ;
+        sta !textie_arg_pos_gfx      ;
         sep #$20                        ;
         jsr background_draw             ; and fill background.
         +                               ;
@@ -193,10 +193,10 @@ normal:
         sta $2253                       ;
         stz $2254                       ;
         rep #$20                        ;
-        lda !textie_line_pos_gfx_lo     ;
+        lda !textie_line_pos_gfx        ;
         clc                             ;
         adc $2306                       ;
-        sta !textie_arg_pos_gfx_lo      ;
+        sta !textie_arg_pos_gfx      ;
         sep #$20                        ;
         lda !textie_caret_pos_col       ;
         sta !textie_arg_pos_col         ;
@@ -226,7 +226,7 @@ normal:
         rep #$20                        ;
         nop                             ;
         lda $2306                       ;
-        sta !textie_arg_tile_counter_lo ;
+        sta !textie_arg_tile_counter ;
         sep #$20                        ;
         jsr canvas_upload               ; and upload canvas to vram.
         
@@ -238,10 +238,10 @@ normal:
         sep #$20                        ;
         ora !textie_caret_pos_screen_x  ;
         rep #$20                        ;
-        sta !textie_arg_tilemap_pos_lo  ;
+        sta !textie_arg_tilemap_pos  ;
         sep #$20                        ;
         lda $00                         ;
-        sta !textie_arg_tile_counter_lo ; get tile count,
+        sta !textie_arg_tile_counter ; get tile count,
         sta !textie_arg_tile_priority   ; set priority,
         jsr tilemap_layText             ; and lay text into tilemap.
         
@@ -264,7 +264,7 @@ normal:
         lda #$50                        ; set word flag, and leading space flag.
         tsb !textie_line_option         ;
         rep #$20                        ; move message pointer.
-        inc !textie_message_pointer_lo  ;
+        inc !textie_message_pointer     ;
         sep #$20                        ;
         
         rts

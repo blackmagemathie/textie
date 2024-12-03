@@ -17,8 +17,8 @@ main:
     nop                                 ;
     lda $2306                           ;
     clc                                 ;
-    adc !textie_line_pos_gfx_lo         ;
-    sta !textie_line_pos_gfx_lo         ;
+    adc !textie_line_pos_gfx            ;
+    sta !textie_line_pos_gfx            ;
     sep #$20                            ;
     lda !textie_message_pos_screen_x    ; set screen and col pos.
     sta !textie_line_pos_screen_x       ;

@@ -41,8 +41,8 @@ default:
     ; get starting gfx pos
     rep #$20
     lda [$00],y
-    sta !textie_message_pos_gfx_lo
-    sta !textie_line_pos_gfx_lo
+    sta !textie_message_pos_gfx
+    sta !textie_line_pos_gfx
     sep #$20
     iny #2
 

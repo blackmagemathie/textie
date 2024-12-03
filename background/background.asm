@@ -8,13 +8,13 @@ draw:
     ; !textie_arg_tile_counter (1) -> how many 8px tiles to fill.
     ; !textie_background_id        -> background id.
     ; ----------------
-    lda !textie_arg_tile_counter_lo ; tile count zero?
+    lda !textie_arg_tile_counter ; tile count zero?
     bne +                           ; if yes,
     rts                             ; return.
     +                               ;
     sta $3100                       ; else, set counter.
     rep #$30                        ; get index to bg gfx.
-    lda !textie_arg_pos_gfx_lo      ;
+    lda !textie_arg_pos_gfx      ;
     asl #4                          ;
     tay                             ;
     lda !textie_background_id               ; buffer background gfx.

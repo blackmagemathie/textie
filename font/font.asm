@@ -16,14 +16,14 @@ load:
 
     ; get pointers
     lda.l font_data_index+$01,x
-    sta !textie_font_widths_lo
+    sta !textie_font_widths
     lda.l font_data_index+$03,x
-    sta !textie_font_gfx_lo
+    sta !textie_font_gfx
     lda.l font_data_index+$05,x
-    sta !textie_font_indices_lo
+    sta !textie_font_indices
     sep #$20
     lda.l font_data_index+$00,x
-    sta !textie_font_data_bk
+    sta !textie_font_bk
 
     ; get height
     lda.l font_data_index+$07,x

@@ -25,8 +25,8 @@ classic:
     ; set gfx pos
     rep #$20
     lda #$0001
-    sta !textie_message_pos_gfx_lo
-    sta !textie_line_pos_gfx_lo
+    sta !textie_message_pos_gfx
+    sta !textie_line_pos_gfx
     sep #$20
 
     ; set space

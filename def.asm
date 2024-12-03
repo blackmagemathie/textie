@@ -21,27 +21,21 @@
                                   ; i = waiting for input.
 
 ; message
-    !textie_message_pointer_lo   = $3512 ; pointer, lo.
-    !textie_message_pointer_hi   = $3513 ;          hi.
-    !textie_message_pointer_bk   = $3514 ;          bank.
-    !textie_message_pos_gfx_lo   = $3515 ; gfx position, lo.
-    !textie_message_pos_gfx_hi   = $3516 ;               hi.
+    !textie_message_pointer = $3512 ; (3) pointer
+    !textie_message_pos_gfx = $3515 ; (2) gfx pos
     !textie_message_pos_screen_x = $3517 ; screen position, x.
     !textie_message_pos_screen_y = $3518 ;                  y.
     !textie_message_pos_col      = $3519 ;                  col.
 
 ; header
-    !textie_header_pointer_lo   = $351b ; pointer, lo.
-    !textie_header_pointer_hi   = $351c ;          hi.
-    !textie_header_pointer_bk   = $351d ;          bank.
-    !textie_header_id           = $351e ; format id.
+    !textie_header_pointer = $351b ; (3) pointer
+    !textie_header_id      = $351e
     
 ; background
     !textie_background_id  = $351f ; id.
 
 ; line
-    !textie_line_pos_gfx_lo   = $3520 ; gfx position, lo.
-    !textie_line_pos_gfx_hi   = $3521 ;               hi.
+    !textie_line_pos_gfx = $3520 ; (2) gfx pos
     !textie_line_pos_screen_x = $3522 ; screen position, x.
     !textie_line_pos_screen_y = $3523 ;                  y.
     !textie_line_pos_col      = $3524 ;                  col.
@@ -64,13 +58,10 @@
 
 ; font
     !textie_font_id         = $3530 ; id.
-    !textie_font_data_bk    = $3531 ; data pointer, bank.
-    !textie_font_gfx_lo     = $3532 ; pointer to gfx, lo.
-    !textie_font_gfx_hi     = $3533 ;                 hi.
-    !textie_font_widths_lo  = $3534 ;            widths, lo.
-    !textie_font_widths_hi  = $3535 ;                    hi.
-    !textie_font_indices_lo = $3536 ;            gfx indices, lo.
-    !textie_font_indices_hi = $3537 ;                         hi.
+    !textie_font_bk         = $3531 ; pointer bank
+    !textie_font_gfx        = $3532 ; (2) pointer to gfx
+    !textie_font_widths     = $3534 ; (2)            widths
+    !textie_font_indices    = $3536 ; (2)            gfx indices
     !textie_font_height     = $3538 ; height (in 8px tiles, -1).
     
 ; char
@@ -98,14 +89,11 @@
                                    ; e = enable sounds, 0 to 4.
 
 ; arg
-    !textie_arg_pos_gfx_lo      = $35f0 ; gfx position, lo.
-    !textie_arg_pos_gfx_hi      = $35f1 ;               hi.
+    !textie_arg_pos_gfx = $35f0 ; (2) gfx pos
     !textie_arg_pos_col         = $35f2 ; position, col.
-    !textie_arg_tilemap_pos_lo  = $35f3 ; tilemap position, lo.
-    !textie_arg_tilemap_pos_hi  = $35f4 ;                   hi.
+    !textie_arg_tilemap_pos  = $35f3 ; (2) tilemap pos
     !textie_arg_tile_priority   = $35f6 ; tile priority (off if zero, on otherwise).
-    !textie_arg_tile_counter_lo = $35f7 ; how many tiles to process, lo.
-    !textie_arg_tile_counter_hi = $35f8 ;                            hi.
+    !textie_arg_tile_counter = $35f7 ; (2) how many tiles to process
     !textie_arg_quarter         = $35f9 ; which part of layer 3 to upload tilemap to.
     !textie_arg_rows            = $35fa ; -
     !textie_arg_move            = $35fb ; -

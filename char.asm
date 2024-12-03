@@ -10,10 +10,10 @@ getWidth:
     ; $00-$02           <- pointer to font widths.
     ; ----------------
     rep #$20
-    lda !textie_font_widths_lo
+    lda !textie_font_widths
     sta $00
     sep #$20
-    lda !textie_font_data_bk
+    lda !textie_font_bk
     sta $02
     ldy !textie_char_id
     lda [$00],y
@@ -45,18 +45,18 @@ draw:
     ; setup barrel shift.
     lda #$82
     sta $2258
-    lda !textie_font_data_bk
+    lda !textie_font_bk
     sta $04
     rep #$30
     lda !textie_char_id
     and #$00ff
     asl
     tay
-    lda !textie_font_indices_lo
+    lda !textie_font_indices
     sta $02
     lda [$02],y
     clc
-    adc !textie_font_gfx_lo
+    adc !textie_font_gfx
     sta $2259
     sep #$30
     lda $04
@@ -64,7 +64,7 @@ draw:
 
     ; set canvas pos.
     rep #$20
-    lda !textie_arg_pos_gfx_lo
+    lda !textie_arg_pos_gfx
     asl #6
     sta $02
     sep #$20

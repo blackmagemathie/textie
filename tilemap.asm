@@ -16,7 +16,7 @@ upload:
     sta $318f                       ;
     sta $2225                       ;
     rep #$20                        ; set initial tilemap pos.
-    lda !textie_arg_tilemap_pos_lo  ;
+    lda !textie_arg_tilemap_pos  ;
     sta $00                         ;
     sep #$20                        ;
     ldx !textie_arg_rows            ; get rows in x.
@@ -35,7 +35,7 @@ upload:
     lda.b #(!textie_tilemap>>16)    ;
     sta.w !qutie_ram_bk,y           ;
     rep #$20                        ; set transfer size.
-    lda !textie_arg_tile_counter_lo ;
+    lda !textie_arg_tile_counter ;
     asl                             ;
     sep #$20                        ;
     sta.w !qutie_size_lo,y          ;
@@ -80,7 +80,7 @@ layText:
     ; ----------------
     lda !textie_font_height         ; get font height.
     sta $00                         ;
-    lda !textie_arg_tile_counter_lo ; get tilemap step.
+    lda !textie_arg_tile_counter ; get tilemap step.
     asl                             ;
     eor #$ff                        ;
     sec                             ;
@@ -88,10 +88,10 @@ layText:
     sta $01                         ;
     stz $02                         ;
     rep #$30                        ; get tile number and props.
-    lda !textie_arg_tilemap_pos_lo  ;
+    lda !textie_arg_tilemap_pos  ;
     asl                             ;
     tay                             ;
-    lda !textie_arg_pos_gfx_lo      ;
+    lda !textie_arg_pos_gfx      ;
     sta $03                         ;
     sep #$20                        ;
     lda !textie_char_palette        ;
@@ -106,7 +106,7 @@ layText:
     sta $318f                       ;
     sta $2225                       ;
     .loopRows:
-        lda !textie_arg_tile_counter_lo ; get tile counter.
+        lda !textie_arg_tile_counter ; get tile counter.
         sta $05                         ;
         rep #$20                        ; copy tile numbers and props.
         lda $03                         ;

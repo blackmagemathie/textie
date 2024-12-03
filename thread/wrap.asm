@@ -12,10 +12,10 @@ testWord:
     lda !textie_space_postchar  ; get postchar space.
     sta $07                     ;
     rep #$20                    ; get pointer to font widths.
-    lda !textie_font_widths_lo  ;
+    lda !textie_font_widths     ;
     sta $04                     ;
     sep #$20                    ;
-    lda !textie_font_data_bk    ;
+    lda !textie_font_bk         ;
     sta $06                     ;
     stz $03                     ; clear width.
     .loop:

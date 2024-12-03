@@ -10,9 +10,9 @@ process:
     ; X       <- (garbage)
     ; Y       <- (garbage)
     ; ----------------
-    lda !textie_header_pointer_lo : sta $00
-    lda !textie_header_pointer_hi : sta $01
-    lda !textie_header_pointer_bk : sta $02
+    lda !textie_header_pointer   : sta $00
+    lda !textie_header_pointer+1 : sta $01
+    lda !textie_header_pointer+2 : sta $02
     lda !textie_header_id
     asl
     tax
