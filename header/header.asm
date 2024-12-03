@@ -1,12 +1,12 @@
 namespace header
 
-process:
-    ; processes a message header.
+run:
+    ; runs message header.
     ; ----------------
-    ; !textie_header_id          -> id of header type.
-    ; !textie_header_pointer (3) -> pointer to header.
+    ; !textie_header_id (1)      -> id
+    ; !textie_header_pointer (3) -> pointer
     ; ----------------
-    ; $00-$02 <- (garbage)
+    ; $00 (3) <- (garbage)
     ; X       <- (garbage)
     ; Y       <- (garbage)
     ; ----------------
