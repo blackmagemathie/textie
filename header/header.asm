@@ -20,8 +20,10 @@ process:
     jmp (list,x)
 
 list:
+    dw none
     dw default
     
+incsrc "item/none.asm"
 incsrc "item/default.asm"
 
 namespace off
