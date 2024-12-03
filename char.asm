@@ -1,13 +1,13 @@
 namespace char
 
 getWidth:
-    ; returns a char's width (in px).
+    ; returns char width.
     ; ----------------
-    ; textie_char_id -> char id.
+    ; textie_char_id (1) -> char id
     ; ----------------
-    ; textie_char_width <- char width (in px).
-    ; A                 <- char width (in px).
-    ; $00-$02           <- pointer to font widths.
+    ; textie_char_width (1) <- char width (in px)
+    ; A (1) <- char width (in px)
+    ; $00 (3) <- font widths pointer
     ; ----------------
     rep #$20
     lda !textie_font_widths
@@ -21,17 +21,17 @@ getWidth:
     rts
 
 draw:
-    ; draws a single character in canvas.
+    ; draws single character in canvas.
     ; ----------------
-    ; !textie_char_id         -> char to draw.
-    ; !textie_char_width      -> char width.
-    ; !textie_arg_pos_gfx (3) -> canvas position.
-    ; !textie_char_option     -> char option.
+    ; !textie_char_id (1) -> char to draw
+    ; !textie_char_width (1) -> char width
+    ; !textie_arg_pos_gfx (3) -> canvas pos
+    ; !textie_char_option (1) -> char option
     ; ----------------
-    ; $00-$09 <- (garbage)
+    ; $00 (10) <- (garbage)
     ; ----------------
 
-    ; get char dimensions.
+    ; get char dimensions
     lda !textie_char_width
     bne +
     rts
@@ -42,7 +42,7 @@ draw:
     asl #3
     sta $01
 
-    ; setup barrel shift.
+    ; setup barrel shift
     lda #$82
     sta $2258
     lda !textie_font_bk
@@ -62,7 +62,7 @@ draw:
     lda $04
     sta $225b
 
-    ; set canvas pos.
+    ; set canvas pos
     rep #$20
     lda !textie_arg_pos_gfx
     asl #6
@@ -74,13 +74,16 @@ draw:
     lda.b #!textie_canvas_bmp>>16
     sta $06
 
-    ldx !textie_font_height ; get tile step.
-    lda.l .tileStep,x       ;
-    sta $08                 ;
-    lda !textie_char_option ; get and clean char option.
-    and #$c0                ;
-    ora #$03                ;
-    sta $09                 ;
+    ; get tile step
+    ldx !textie_font_height
+    lda.l .tileStep,x
+    sta $08
+
+    ; get and clean char option
+    lda !textie_char_option
+    and #$c0
+    ora #$03
+    sta $09
     .loopCols:
         rep #$20    ; copy canvas pos.
         lda $02     ;
