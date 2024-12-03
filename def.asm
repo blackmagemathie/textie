@@ -1,10 +1,10 @@
 ; tilemap ($800 bytes)
-    !textie_tilemap      = $413800
-    !textie_tilemap_page = (!textie_tilemap&$01e000)/$2000
+    !textie_tilemap      = $423800
+    !textie_tilemap_page = (!textie_tilemap&$03e000)/$2000
     !textie_tilemap_abs  = $6000+(!textie_tilemap&$1fff)
 
 ; canvas ($3800 bytes)
-    !textie_canvas      = $410000
+    !textie_canvas      = $420000
     !textie_canvas_bmp  = $600000+((!textie_canvas&$0fffff)*4)
 
 ; layer
