@@ -20,9 +20,11 @@ process:
 
 list:
     dw none
+    dw classic
     dw default
     
 incsrc "item/none.asm"
+incsrc "item/classic.asm"
 incsrc "item/default.asm"
 
 namespace off
