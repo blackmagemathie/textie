@@ -1,4 +1,4 @@
-namespace wait
+namespace waitFrames
 
 ; halts thread for a specific amount of time.
 ; ----------------
