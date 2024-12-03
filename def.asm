@@ -8,7 +8,7 @@
     !textie_canvas_bmp  = $600000+((!textie_canvas&$0fffff)*4)
 
 ; layer
-    !textie_layer_backup_gfx = $404000 ; complete backup of layer 3 ($4000 bytes).
+    !textie_layer_backup_gfx = $424000 ; complete backup of layer 3 ($4000 bytes).
     !textie_layer_backup_lm  = $35d0   ; backup of layer 3 image behavior set in lm ($13 bytes).
 
 ; thread
