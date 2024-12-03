@@ -13,7 +13,6 @@ process:
     lda !textie_header_pointer_lo : sta $00
     lda !textie_header_pointer_hi : sta $01
     lda !textie_header_pointer_bk : sta $02
-    ldy #$00
     lda !textie_header_id
     asl
     tax
