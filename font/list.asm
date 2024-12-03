@@ -28,8 +28,10 @@ namespace font_data
     ; INDEX+INSERT FONTS BELOW
     
     index:
+        %indexFont("message",0)
         %indexFont("fontie",0)
     
+    %insertFont("message")
     %insertFont("fontie")
         
 namespace off
