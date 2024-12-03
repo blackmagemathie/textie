@@ -15,9 +15,10 @@
     !textie_thread_id     = $3500 ; id.
     !textie_thread_wait   = $350f ; wait timer, in frames.
     !textie_thread_state  = $3510 ; state.
-    !textie_thread_option = $3511 ; format : cs------
+    !textie_thread_option = $3511 ; format : csi-----
                                   ; c = chain commands.
                                   ; s = chain spaces.
+                                  ; i = waiting for input.
 
 ; message
     !textie_message_pointer_lo   = $3512 ; pointer, lo.

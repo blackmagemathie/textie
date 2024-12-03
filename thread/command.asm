@@ -29,6 +29,7 @@ list:
     %indexCommand("toggleWrap",1,1,1,0)             ; $09
     %indexCommand("setLeadingSpaceSkip",1,1,0,1)    ; $0a
     %indexCommand("wait",1,0,0,1)                   ; $0b
+    %indexCommand("waitInput",0,0,0,1)              ; $0c
     
 %insertCommand("end")
 %insertCommand("newLine")
@@ -42,5 +43,6 @@ list:
 %insertCommand("toggleWrap")
 %insertCommand("setLeadingSpaceSkip")
 %insertCommand("wait")
+%insertCommand("waitInput")
 
 namespace off

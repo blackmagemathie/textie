@@ -9,7 +9,20 @@ run:
     ; run current thread.
     ; ----------------
 
-    ; wait if thread paused
+    ; waiting for input?
+    lda !textie_thread_option
+    and #$20
+    beq ++
+    lda $16
+    ora $18
+    bmi +
+    rtl
+    +
+    lda #$20
+    trb !textie_thread_option
+    ++
+
+    ; waiting for frames?
     lda !textie_thread_wait
     beq +
     dec
