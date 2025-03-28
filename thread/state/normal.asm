@@ -65,7 +65,7 @@ normal:
         ora !textie_caret_pos_col       ;
         cmp $00                         ; and check if exceeded.
         bcc +                           ; if yes,
-        jsr thread_command_newLine_main ; start new line.
+        jsr thread_util_breakLine       ; start new line.
         +                               ;
         ++  
         rep #$20                        ; move message pointer.
@@ -116,7 +116,7 @@ normal:
         sta $02                         ;
         jsr thread_wrap_testWord        ; and test word.
         bcc +                           ; fits? if no,
-        jsr thread_command_newLine_main ; start new line.
+        jsr thread_util_breakLine       ; start new line.
         +
         
         ; process auto background fill.
