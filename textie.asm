@@ -12,12 +12,12 @@ freecode
     
     namespace nested on
     
-    incsrc "layer.asm"
-    incsrc "char.asm"
-    incsrc "canvas.asm"
-    incsrc "tilemap.asm"
+    incsrc "code/tilemap.asm"
+    incsrc "code/font.asm"
+    incsrc "code/layer.asm"
+    incsrc "code/char.asm"
+    incsrc "code/canvas.asm"
     
-    incsrc "font/font.asm"
     incsrc "background/background.asm"
     incsrc "thread/thread.asm"
     incsrc "header/header.asm"
