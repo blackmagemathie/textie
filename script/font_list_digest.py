@@ -69,7 +69,7 @@ def main():
 
             # empty?
             if not font:
-                fio_temp_index.write("dw $ffff,$ffff,$ffff,$ffff\n")
+                fio_temp_index.write("fill 8\n")
                 continue
 
             # data
