@@ -8,4 +8,4 @@ fonts/*
 temp/*
 script/__pycache__/
 
-list_fonts.txt
+list/
