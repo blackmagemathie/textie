@@ -7,7 +7,7 @@ from util import error
 
 def main():
 
-    fp_list = ".."+sep+"list"+sep+list_fonts.txt"
+    fp_list = ".."+sep+"list"+sep+"fonts.txt"
     fp_dir_fonts = ".."+sep+"fonts"
     fp_dir_temp = ".."+sep+"temp"
     fn_gfx = "gfx.bin"
