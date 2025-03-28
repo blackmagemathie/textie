@@ -5,7 +5,8 @@ incsrc "def.asm"
 freedata
     
     background_data: incbin "background/data.bin"
-    incsrc "font/list.asm"
+    incsrc "temp/font_index.asm"
+    incsrc "temp/font_data.asm"
     
 freecode
     
