@@ -17,7 +17,7 @@ freecode
     incsrc "code/layer.asm"
     incsrc "code/char.asm"
     incsrc "code/canvas.asm"
+    incsrc "code/header.asm"
     
     incsrc "background/background.asm"
     incsrc "thread/thread.asm"
-    incsrc "header/header.asm"

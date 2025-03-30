@@ -2,10 +2,11 @@ icon.ico
 desktop.ini
 
 doc/
-box/
-box.asm
-fonts/*
 temp/*
 script/__pycache__/
+script/.dependencies
 
 list/
+fonts/*
+headers/*
+frames/*

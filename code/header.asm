@@ -19,12 +19,8 @@ run:
     jmp (list,x)
 
 list:
-    dw none
-    dw classic
-    dw default
+    incsrc "../temp/header_index.asm"
     
-incsrc "item/none.asm"
-incsrc "item/classic.asm"
-incsrc "item/default.asm"
+incsrc "../temp/header_code.asm"
 
 namespace off
