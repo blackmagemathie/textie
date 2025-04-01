@@ -18,26 +18,32 @@ normal:
     beq .cmd
     cmp #$ff
     beq .space
-    bra .char
+    jmp .char
 
     .cmd:
 
         ; x <- command index
         ldy #$01
         lda [$00],y
-        asl #3
         tax
 
         ; run command main
         iny
         phx
-        jsr (command_list,x)
+        lda.w command_index_main_lo,x
+        sta.w !textie_command_abs+0
+        lda.w command_index_main_hi,x
+        sta.w !textie_command_abs+1
+        pea.w +
+        jmp.w (!textie_command_abs)
+        +
+        nop
         plx
 
         ; move message pointer
         lda #$00
         xba
-        lda.w command_list+2,x
+        lda.w command_index_narg,x
         inc #2
         rep #$20
         clc
@@ -48,7 +54,7 @@ normal:
         ; chain if possible
         lda !textie_thread_option
         bpl +
-        lda.w command_list+3,x
+        lda.w command_index_flag,x
         bit #$01
         bne .readChar
         +

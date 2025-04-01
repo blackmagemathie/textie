@@ -13,14 +13,17 @@ def list_command():
     fp_temp_code  = ".."+sep+"temp"+sep+"command_code.asm"
     deps = []
 
+    index_labels = ["narg","flag","main_lo","main_hi","wrap_lo","wrap_hi"]
+
     # convert list
     testfile(fp_list)
     with open(fp_list,"r",encoding="utf-8") as fio_list:
         lines = getlines(fio_list)
-    commands = orderlines(lines,0x20)
+    commands = orderlines(lines,0x100)
         
     # produce files
     counter = 0
+
     with open(fp_temp_index,"w") as fio_temp_index, open(fp_temp_code,"w") as fio_temp_code:
 
         temp_index = (
@@ -28,11 +31,13 @@ def list_command():
         )
         fio_temp_index.write(temp_index)
 
-        for command in commands:
+        for id,command in enumerate(commands):
 
             # empty?
             if not command:
-                fio_temp_index.write("fill 8\n")
+                commands[id] = {}
+                for index_label in index_labels:
+                    commands[id][index_label] = 0
                 continue
             
             # get props
@@ -43,7 +48,7 @@ def list_command():
             deps.append(command_dir_raw+fn_props)
 
             # code
-            label = "command_code_"+str(command["id"])
+            label = "command_code_"+str(id)
             temp_code = (
                 "namespace \"{0}\"\n"
                 "incsrc \"{1}\"\n"
@@ -57,22 +62,34 @@ def list_command():
             flags += 1 if props["chainable"] else 0
             flags += 2 if props["wrap"]=="end" else 0
             flags += 4 if props["wrap"]=="ignore" else 0
+            commands[id]["flag"] = flags
+
+            commands[id]["narg"] = sum(arg["len"] for arg in props["args"])
+
+            label_main = "{0}_{1}".format(label,props["labels"]["main"])
+            commands[id]["main_lo"] = label_main
+            commands[id]["main_hi"] = label_main+">>8"
+
+            if props["wrap"]=="run":
+                label_wrap = "{0}_{1}".format(label,props["labels"]["wrap"])
+                commands[id]["wrap_lo"] = label_wrap
+                commands[id]["wrap_hi"] = label_wrap+">>8"
+            else:
+                commands[id]["wrap_lo"] = 0
+                commands[id]["wrap_hi"] = 0
+                
+            counter += 1
+
+        for index_label in index_labels:
+
             temp_index = (
-                "dw {label}_{main}\n"
-                "db {nargs}\n"
-                "db {flags}\n"
-                "dw {wrap}\n"
-                "dw 0\n"
+                "index_{label}:\n"
+                "db {values}\n"
             ).format(
-                label = label,
-                main = props["labels"]["main"],
-                nargs = sum(arg["len"] for arg in props["args"]),
-                flags = str(flags),
-                wrap = label+"_"+props["labels"]["wrap"] if props["wrap"]=="run" else 0
+                label = index_label,
+                values = ",".join(str(command[index_label]) for command in commands)
             )
             fio_temp_index.write(temp_index)
-
-            counter += 1
 
     print("prep'd "+str(counter)+" commands successfully.")
     return deps

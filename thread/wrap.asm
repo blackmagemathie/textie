@@ -46,12 +46,11 @@ testWord:
         ; get command index
         ldy #$01
         lda [$00],y
-        asl #3
         tax
         ; ignore?
-        lda.w command_list+3,x
+        lda.w command_index_flag,x
         bit #$04
-        bne +
+        bne ..noRun
         ; end ?
         bit #$02
         bne .compare
@@ -59,15 +58,22 @@ testWord:
         ; run command (wrap)
         iny
         phx
-        jsr.w (command_list+4,x)
+        lda.w command_index_wrap_lo,x
+        sta.w !textie_command_abs+0
+        lda.w command_index_wrap_hi,x
+        sta.w !textie_command_abs+1
+        pea.w +
+        jmp.w (!textie_command_abs)
+        +
+        nop
         plx
 
-        +
+        ..noRun
 
         ; move pointer
         lda #$00
         xba
-        lda.w command_list+2,x
+        lda.w command_index_narg,x
         inc #2
         rep #$20
         clc
