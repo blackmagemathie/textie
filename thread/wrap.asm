@@ -9,15 +9,22 @@ testWord:
     ; carry   <- clear = fits; set = doesn't fit.
     ; $00-$07 <- (garbage)
     ; ----------------
-    lda !textie_space_postchar  ; get postchar space.
-    sta $07                     ;
-    rep #$20                    ; get pointer to font widths.
-    lda !textie_font_widths     ;
-    sta $04                     ;
-    sep #$20                    ;
-    lda !textie_font_bk         ;
-    sta $06                     ;
-    stz $03                     ; clear width.
+
+    ; get postchar space
+    lda !textie_space_postchar
+    sta $07
+
+    ; get pointer to font widths
+    rep #$20
+    lda !textie_font_widths
+    sta $04
+    sep #$20
+    lda !textie_font_bk
+    sta $06
+
+    ; clear width
+    stz $03
+
     .loop:
         jsr .compare    ; fits?
         bcs .end        ; if no, end.
@@ -31,46 +38,61 @@ testWord:
         cmp !textie_arg_width
         bne .end
         clc
-     .end:
+    .end:
         rts
-    ; ----
+
     .cmd:
-        ldy #$01                        ; get command index.
-        lda [$00],y                     ;
-        asl #3                          ;
-        tax                             ;
-        lda.w command_list+3,x   ; ignore?
-        bit #$04                        ;
-        bne +                           ; if no,
-        bit #$02                        ; jump to final comparison?
-        bne .compare                    ; if no,
-        iny                             ; execute command (wrap routine).
-        phx                             ;
-        jsr.w (command_list+4,x) ;
-        plx                             ;
+
+        ; get command index
+        ldy #$01
+        lda [$00],y
+        asl #3
+        tax
+        ; ignore?
+        lda.w command_list+3,x
+        bit #$04
+        bne +
+        ; end ?
+        bit #$02
+        bne .compare
+
+        ; run command (wrap)
+        iny
+        phx
+        jsr.w (command_list+4,x)
+        plx
+
         +
-        lda #$00                        ; move pointer.
-        xba                             ;
-        lda.w command_list+2,x   ;
-        inc #2                          ;
-        rep #$20                        ;
-        clc                             ;
-        adc $00                         ;
-        sta $00                         ;
-        sep #$20                        ;
+
+        ; move pointer
+        lda #$00
+        xba
+        lda.w command_list+2,x
+        inc #2
+        rep #$20
+        clc
+        adc $00
+        sta $00
+        sep #$20
+
         bra .loop
-    ; ----
+
     .char:
-        tay         ; add char width and postchar space.
-        lda [$04],y ;
-        clc         ;
-        adc $03     ;
-        clc         ;
-        adc $07     ;
-        sta $03     ;
-        rep #$20    ; move pointer.
-        inc $00     ;
-        sep #$20    ;
+
+        ; add char width and postchar space
+        tay
+        lda [$04],y
+        clc
+        adc $03
+        clc
+        adc $07
+        sta $03
+
+        ; move pointer
+        rep #$20
+        inc $00
+        sep #$20
+
         bra .loop
 
 namespace off
