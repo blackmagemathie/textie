@@ -35,17 +35,17 @@
     !textie_background_id  = $351f ; id.
 
 ; line
-    !textie_line_pos_gfx = $3520 ; (2) gfx pos
-    !textie_line_pos_screen_x = $3522 ; screen position, x.
-    !textie_line_pos_screen_y = $3523 ;                  y.
-    !textie_line_pos_col      = $3524 ;                  col.
-    !textie_line_width        = $3525 ; max width, in pixels.
-    !textie_line_option       = $3526 ; format : WwSsb---
-                                      ; W = word wrap.
-                                      ; w = clear if not in a word, set otherwise.
-                                      ; S = skip leading spaces.
-                                      ; s = clear if in leading spaces, set otherwise.
-                                      ; b = disable auto background fill.
+    !textie_line_pos_gfx      = $3520 ; (2) gfx pos
+    !textie_line_pos_screen_x = $3522 ; screen position, x
+    !textie_line_pos_screen_y = $3523 ;                  y
+    !textie_line_pos_col      = $3524 ;                  col
+    !textie_line_width        = $3525 ; max width, in px
+    !textie_line_option       = $3526 ; format:
+        !textie_line_flag_wrap      = $80 ; enable word wrap
+        !textie_line_flag_in_word   = $40 ; set if in word / clear if in space
+        !textie_line_flag_lead_skip = $20 ; skip leading spaces
+        !textie_line_flag_in_lead   = $10 ; set if in leading spaces
+        !textie_line_flag_autofill  = $08 ; enable auto background fill
 
 ; caret
     !textie_caret_pos_fill     = $352b ; next screen x position to trigger background fill.

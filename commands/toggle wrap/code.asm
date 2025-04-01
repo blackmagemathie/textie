@@ -1,11 +1,11 @@
 main:
     lda [$00],y
     lsr
-    lda #$80
+    lda.b #!textie_line_flag_wrap
     bcc +
-    tsb !textie_line_option
+    tsb.w !textie_line_option
     rts
     +
-    trb !textie_line_option
+    trb.w !textie_line_option
     rts
     

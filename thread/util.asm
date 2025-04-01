@@ -53,9 +53,13 @@ breakLine:
     sta !textie_line_pos_col
     sta !textie_caret_pos_col
 
-    ; clear word flag
-    lda #$40
-    trb !textie_line_option
+    ; clear "word"
+    lda.b #!textie_line_flag_in_word
+    trb.w !textie_line_option
+
+    ; set "in lead"
+    lda.b #!textie_line_flag_in_lead
+    tsb.w !textie_line_option
 
     rts
 

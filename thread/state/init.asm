@@ -2,6 +2,14 @@ init:
     ; inits thread.
     ; ----------------
 
+    ; clear "word"
+    lda.b #!textie_line_flag_in_word
+    trb.w !textie_line_option
+    
+    ; set "in lead"
+    lda.b #!textie_line_flag_in_lead
+    tsb.w !textie_line_option
+
     ; run header
     jsr header_run
 

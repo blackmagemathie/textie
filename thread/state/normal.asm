@@ -57,40 +57,45 @@ normal:
 
     .space:
 
-        lda !textie_line_option         ; skip leading spaces?
-        bit #$20                        ; if yes,
-        beq +                           ;
-        bit #$10                        ; in leading spaces?
-        beq ++                          ; if yes, skip caret movement.
-        +                               ;
-        lda !textie_space_regular       ; move caret.
-        sta !textie_arg_move            ;
-        jsr thread_util_moveCaret       ;
-        lda !textie_line_option         ; word wrap enabled?
-        bpl +                           ; if yes,
-        lda !textie_line_pos_screen_x   ; get line end pos,
-        asl #3                          ;
-        ora !textie_line_pos_col        ;
-        clc                             ;
-        adc !textie_line_width          ;
-        sta $00                         ;
-        lda !textie_caret_pos_screen_x  ; get caret pos,
-        asl #3                          ;
-        ora !textie_caret_pos_col       ;
-        cmp $00                         ; and check if exceeded.
-        bcc +                           ; if yes,
-        jsr thread_util_breakLine       ; start new line.
-        +                               ;
-        ++
+        ; skip leading spaces?
+        lda.w !textie_line_option
+        and.b #(!textie_line_flag_lead_skip+!textie_line_flag_in_lead)
+        cmp.b #(!textie_line_flag_lead_skip+!textie_line_flag_in_lead)
+        beq +
+
+        ; move caret
+        lda !textie_space_regular
+        sta !textie_arg_move
+        jsr thread_util_moveCaret
+
+        ; word wrap enabled?
+        lda.w !textie_line_option
+        bit.b #!textie_line_flag_wrap
+        beq +
+
+        lda !textie_line_pos_screen_x
+        asl #3
+        ora !textie_line_pos_col
+        clc
+        adc !textie_line_width
+        sta $00
+        lda !textie_caret_pos_screen_x
+        asl #3
+        ora !textie_caret_pos_col
+        cmp $00
+        bcc +
+        jsr thread_util_breakLine
+
+        +
 
         ; move message pointer
         rep #$20
         inc !textie_message_pointer
         sep #$20
 
-        ; clear word flag
-        lda #$40
-        trb !textie_line_option
+        ; clear "word"
+        lda.b #!textie_line_flag_in_word
+        trb.w !textie_line_option
 
         ; chain if possible
         lda !textie_thread_option
@@ -119,11 +124,12 @@ normal:
         ..wrap:
 
             ; enabled?
-            lda !textie_line_option
-            bpl ...skip
+            lda.w !textie_line_option
+            bit.b #!textie_line_flag_wrap
+            beq ...skip
 
             ; word flag clear?
-            bit #$40
+            bit.b #!textie_line_flag_in_word
             bne ...skip
 
             ; get caret pos
@@ -191,9 +197,9 @@ normal:
             pha
 
             ; autofill enabled?
-            lda !textie_line_option
-            and #$08
-            bne ...noFill
+            lda.w !textie_line_option
+            and.b #!textie_line_flag_autofill
+            beq ...noFill
 
             ; get exact tile count
             lda $01,s
@@ -323,12 +329,17 @@ normal:
 
         ..finish:
 
-            ; set word and leading space flags
-            lda #$50
-            tsb !textie_line_option
+            ; set "word"
+            lda.b #!textie_line_flag_in_word
+            tsb.w !textie_line_option
+
+            ; clear "in lead"
+            lda.b #!textie_line_flag_in_lead
+            trb.w !textie_line_option
+
             ; move message pointer.
             rep #$20
-            inc !textie_message_pointer
+            inc.w !textie_message_pointer
             sep #$20
 
         rts
