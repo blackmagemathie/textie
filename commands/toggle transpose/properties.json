@@ -1,0 +1,26 @@
+{
+    "name": "toggle character color transposition",
+    "about": "toggles character color transposition.",
+
+    "chainable": true,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "flags",
+            "len": 1,
+            "format": {
+                "group": "-------o",
+                "parts": [
+                    {
+                        "name": "o",
+                        "about": "on/off"
+                    }
+                ]
+            }
+        }
+    ]
+}

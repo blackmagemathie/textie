@@ -1,0 +1,17 @@
+{
+    "name": "set background",
+    "about": "sets background to draw behind characters.",
+
+    "chainable": true,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "background id",
+            "len": 1
+        }
+    ]
+}

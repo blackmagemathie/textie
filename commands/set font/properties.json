@@ -1,0 +1,18 @@
+{
+    "name": "set font",
+    "about": "sets character font.",
+
+    "chainable": true,
+    "wrap": "run",
+    "labels": {
+        "main": "main",
+        "wrap": "wrap"
+    },
+
+    "args": [
+        {
+            "name": "font id",
+            "len": 1
+        }
+    ]
+}

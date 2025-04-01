@@ -1,0 +1,19 @@
+{
+    "name": "set post-character space",
+    "about": "sets space to add after drawing a character.",
+
+    "chainable": true,
+    "wrap": "run",
+    "labels": {
+        "main": "main",
+        "wrap": "wrap"
+    },
+
+    "args": [
+        {
+            "name": "space",
+            "len": 1,
+            "about": "in pixels. can be negative."
+        }
+    ]
+}

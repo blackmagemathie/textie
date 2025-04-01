@@ -1,7 +1,6 @@
 icon.ico
 desktop.ini
 
-doc/
 temp/*
 script/__pycache__/
 script/.dependencies

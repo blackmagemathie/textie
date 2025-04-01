@@ -2,7 +2,6 @@ namespace thread
 
 incsrc "util.asm"
 incsrc "wrap.asm"
-incsrc "command.asm"
 incsrc "state.asm"
 
 run:

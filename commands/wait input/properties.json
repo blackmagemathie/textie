@@ -1,0 +1,12 @@
+{
+    "name": "wait for input",
+    "about": "pauses thread until player presses A or B.",
+
+    "chainable": false,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": []
+}

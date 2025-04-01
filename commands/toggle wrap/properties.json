@@ -1,0 +1,26 @@
+{
+    "name": "toggle word wrap",
+    "about": "toggles word wrap.",
+
+    "chainable": true,
+    "wrap": "end",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "flags",
+            "len": 1,
+            "format": {
+                "group": "-------o",
+                "parts": [
+                    {
+                        "name": "o",
+                        "about": "on/off"
+                    }
+                ]
+            }
+        }
+    ]
+}

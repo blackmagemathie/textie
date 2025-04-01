@@ -23,11 +23,11 @@ normal:
         tax                             ;
         iny                             ; execute command (main routine).
         phx                             ;
-        jsr (thread_command_list,x)     ;
+        jsr (command_list,x)     ;
         plx                             ;
         lda #$00                        ; move message pointer.
         xba                             ;
-        lda.w thread_command_list+2,x   ;
+        lda.w command_list+2,x   ;
         inc #2                          ;
         rep #$20                        ;
         clc                             ;
@@ -36,7 +36,7 @@ normal:
         sep #$20                        ;
         lda !textie_thread_option       ; command chaining enabled?
         bpl +                           ; if yes,
-        lda.w thread_command_list+3,x   ; command chainable?
+        lda.w command_list+3,x   ; command chainable?
         bit #$01                        ; if yes,
         bne .readChar                   ; keep going.
         +

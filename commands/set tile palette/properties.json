@@ -1,0 +1,18 @@
+{
+    "name": "set tile palette",
+    "about": "sets palette of tiles to upload.",
+
+    "chainable": true,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "tile palette",
+            "len": 1,
+            "about": "0 to 7 (higher values are AND'd)."
+        }
+    ]
+}

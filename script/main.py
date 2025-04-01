@@ -1,5 +1,6 @@
 from list_font import list_font
 from list_header import list_header
+from list_command import list_command
 
 def run_all():
 
@@ -8,6 +9,7 @@ def run_all():
     # run scripts
     deps.extend(list_font())
     deps.extend(list_header())
+    deps.extend(list_command())
 
     # write deps
     with open(".dependencies","w") as fio_deps:

@@ -1,10 +1,3 @@
-namespace toggleWrap
-
-; toggles word wrap.
-; ----------------
-; arg. 0 <- format : -------o
-;           o = on/off
-
 main:
     lda [$00],y
     lsr
@@ -15,5 +8,4 @@ main:
     +
     trb !textie_line_option
     rts
-
-namespace off
+    

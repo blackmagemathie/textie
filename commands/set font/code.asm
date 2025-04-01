@@ -1,9 +1,3 @@
-namespace setFont
-
-; sets font.
-; ----------------
-; arg. 0 <- font id
-
 main:
     lda [$00],y
     sta !textie_font_id
@@ -25,5 +19,4 @@ wrap:
     sta $06
     sep #$10
     rts
-
-namespace off
+    

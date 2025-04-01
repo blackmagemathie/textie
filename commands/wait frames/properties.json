@@ -1,0 +1,18 @@
+{
+    "name": "wait frames",
+    "about": "pauses thread for set number of frames.",
+
+    "chainable": false,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "time",
+            "len": 1,
+            "about": "in frames."
+        }
+    ]
+}

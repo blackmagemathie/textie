@@ -1,0 +1,18 @@
+{
+    "name": "set regular space",
+    "about": "sets width of regular space (aka character $ff).",
+
+    "chainable": true,
+    "wrap": "end",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "space",
+            "len": 1,
+            "about": "in pixels. can be negative."
+        }
+    ]
+}

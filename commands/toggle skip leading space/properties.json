@@ -1,0 +1,26 @@
+{
+    "name": "toggle skipping leading space",
+    "about": "toggles the skip of next encountered leading space.",
+
+    "chainable": true,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "flags",
+            "len": 1,
+            "format": {
+                "group": "-------o",
+                "parts": [
+                    {
+                        "name": "o",
+                        "about": "on/off"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "line break",
+    "about": "starts a new line.",
+
+    "chainable": true,
+    "wrap": "end",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": []
+}

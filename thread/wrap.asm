@@ -39,19 +39,19 @@ testWord:
         lda [$00],y                     ;
         asl #3                          ;
         tax                             ;
-        lda.w thread_command_list+3,x   ; ignore?
+        lda.w command_list+3,x   ; ignore?
         bit #$04                        ;
         bne +                           ; if no,
         bit #$02                        ; jump to final comparison?
         bne .compare                    ; if no,
         iny                             ; execute command (wrap routine).
         phx                             ;
-        jsr.w (thread_command_list+4,x) ;
+        jsr.w (command_list+4,x) ;
         plx                             ;
         +
         lda #$00                        ; move pointer.
         xba                             ;
-        lda.w thread_command_list+2,x   ;
+        lda.w command_list+2,x   ;
         inc #2                          ;
         rep #$20                        ;
         clc                             ;

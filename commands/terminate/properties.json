@@ -1,0 +1,12 @@
+{
+    "name": "terminate",
+    "about": "terminates running thread entirely.",
+
+    "chainable": false,
+    "wrap": "end",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": []
+}
