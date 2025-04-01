@@ -1,0 +1,26 @@
+{
+    "name": "toggle background autofill",
+    "about": "toggles autofilling canvas with background before drawing character.",
+
+    "chainable": true,
+    "wrap": "ignore",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": [
+        {
+            "name": "flags",
+            "len": 1,
+            "format": {
+                "group": "-------o",
+                "parts": [
+                    {
+                        "name": "o",
+                        "about": "on/off"
+                    }
+                ]
+            }
+        }
+    ]
+}
