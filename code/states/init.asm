@@ -1,6 +1,4 @@
 init:
-    ; inits thread.
-    ; ----------------
 
     ; clear "word"
     lda.b #!textie_line_flag_in_word
@@ -15,13 +13,14 @@ init:
 
     ; set thread option (test)
     lda #$c0
-    sta !textie_thread_option
+    sta.w !textie_thread_option
 
     ; preserve then adjust layer 3 lm settings (test)
     jsr layer_lm_preserve
     jsr layer_lm_set
 
-    ; set thread state to "normal"
-    lda #$02
-    sta !textie_thread_state
+    ; set state to "normal"
+    lda.b #!textie_state_id_normal
+    sta.w !textie_thread_state
+
     rts

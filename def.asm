@@ -1,3 +1,5 @@
+
+
 ; tilemap ($800 bytes)
     !textie_tilemap      = $423800
     !textie_tilemap_page = (!textie_tilemap&$03e000)/$2000
@@ -19,6 +21,14 @@
                                   ; c = chain commands.
                                   ; s = chain spaces.
                                   ; i = waiting for input.
+
+; state ids
+    !textie_state_id_none = $00
+    !textie_state_id_init = $01
+    !textie_state_id_normal = $02
+    !textie_state_id_exit = $03
+    !textie_state_id_wait_frames = $04
+    !textie_state_id_wait_input = $05
 
 ; message
     !textie_message_pointer = $3512 ; (3) pointer

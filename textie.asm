@@ -15,11 +15,12 @@ freecode
     incsrc "code/font.asm"
     incsrc "code/header.asm"
     incsrc "code/command.asm"
-    
     incsrc "code/tilemap.asm"
     incsrc "code/layer.asm"
     incsrc "code/char.asm"
     incsrc "code/canvas.asm"
     incsrc "code/background.asm"
-
-    incsrc "thread/thread.asm"
+    incsrc "code/state.asm"
+    incsrc "code/wrap.asm"
+    incsrc "code/util.asm"
+    incsrc "code/thread.asm"

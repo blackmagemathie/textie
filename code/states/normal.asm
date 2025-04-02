@@ -72,7 +72,7 @@ normal:
         ; move caret
         lda !textie_space_regular
         sta !textie_arg_move
-        jsr thread_util_moveCaret
+        jsr util_moveCaret
 
         ; word wrap enabled?
         lda.w !textie_line_option
@@ -90,7 +90,7 @@ normal:
         ora !textie_caret_pos_col
         cmp $00
         bcc +
-        jsr thread_util_breakLine
+        jsr util_breakLine
 
         +
 
@@ -165,9 +165,9 @@ normal:
             sta $02
 
             ; break line if needed
-            jsr thread_wrap_testWord
+            jsr wrap_testWord
             bcc ...skip
-            jsr thread_util_breakLine
+            jsr util_breakLine
 
             ...skip
 
@@ -331,7 +331,7 @@ normal:
             clc
             adc !textie_space_postchar
             sta !textie_arg_move
-            jsr thread_util_moveCaret
+            jsr util_moveCaret
 
         ..finish:
 
