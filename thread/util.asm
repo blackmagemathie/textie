@@ -5,16 +5,18 @@ moveCaret:
     ; ----------------
     ; !textie_arg_move <- horizontal movement (in px, signed).
     ; ----------------
-    lda !textie_caret_pos_screen_x
-    asl #3
-    ora !textie_caret_pos_col
+
+    lda.w !textie_arg_move
     clc
-    adc !textie_arg_move
-    sta !textie_caret_pos_col
+    adc.w !textie_caret_pos_col
+    sta.w !textie_caret_pos_col
     lsr #3
-    sta !textie_caret_pos_screen_x
+    clc
+    adc.w !textie_caret_pos_screen_x
+    sta.w !textie_caret_pos_screen_x
     lda #$f8
-    trb !textie_caret_pos_col
+    trb.w !textie_caret_pos_col
+
     rts
 
 breakLine:
