@@ -2,8 +2,8 @@ icon.ico
 desktop.ini
 
 temp/*
-script/__pycache__/
-script/.dependencies
+scripts/__pycache__/
+scripts/.dependencies
 
 list/
 fonts/*
