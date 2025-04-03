@@ -48,7 +48,7 @@ testWord:
         lda [$00],y
         tax
         ; ignore?
-        lda.w command_index_flag,x
+        lda.l command_index_flag,x
         bit #$04
         bne ..noRun
         ; end ?
@@ -58,9 +58,9 @@ testWord:
         ; run command (wrap)
         iny
         phx
-        lda.w command_index_wrap_lo,x
+        lda.l command_index_wrap_lo,x
         sta.w !textie_command_abs+0
-        lda.w command_index_wrap_hi,x
+        lda.l command_index_wrap_hi,x
         sta.w !textie_command_abs+1
         pea.w +
         jmp.w (!textie_command_abs)
@@ -73,7 +73,7 @@ testWord:
         ; move pointer
         lda #$00
         xba
-        lda.w command_index_narg,x
+        lda.l command_index_narg,x
         inc #2
         rep #$20
         clc

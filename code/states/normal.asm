@@ -30,9 +30,9 @@ normal:
         ; run command main
         iny
         phx
-        lda.w command_index_main_lo,x
+        lda.l command_index_main_lo,x
         sta.w !textie_command_abs+0
-        lda.w command_index_main_hi,x
+        lda.l command_index_main_hi,x
         sta.w !textie_command_abs+1
         pea.w +
         jmp.w (!textie_command_abs)
@@ -43,7 +43,7 @@ normal:
         ; move message pointer
         lda #$00
         xba
-        lda.w command_index_narg,x
+        lda.l command_index_narg,x
         inc #2
         rep #$20
         clc
@@ -54,7 +54,7 @@ normal:
         ; chain if possible
         lda !textie_thread_option
         bpl +
-        lda.w command_index_flag,x
+        lda.l command_index_flag,x
         bit #$01
         bne .readChar
         +

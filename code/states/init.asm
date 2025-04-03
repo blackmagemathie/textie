@@ -11,13 +11,25 @@ init:
     ; run header
     jsr header_run
 
+    ; run box init
+    lda.w !textie_box_id
+    asl
+    tax
+    rep #$20
+    lda.l box_index_init,x
+    sta.w !textie_command_abs
+    sep #$20
+    pea.w +
+    jmp.w (!textie_command_abs)
+    +
+    nop
+
+    ; jsr layer_lm_preserve
+    ; jsr layer_lm_set
+
     ; set thread option (test)
     lda #$c0
     sta.w !textie_thread_option
-
-    ; preserve then adjust layer 3 lm settings (test)
-    jsr layer_lm_preserve
-    jsr layer_lm_set
 
     ; set state to "normal"
     lda.b #!textie_state_id_normal

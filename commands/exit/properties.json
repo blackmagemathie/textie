@@ -1,0 +1,12 @@
+{
+    "name": "exit",
+    "about": "properly closes box, then terminates thread.",
+
+    "chainable": false,
+    "wrap": "end",
+    "labels": {
+        "main": "main"
+    },
+
+    "args": []
+}

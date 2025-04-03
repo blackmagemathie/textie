@@ -5,6 +5,8 @@ incsrc "def.asm"
 freedata
     
     background_data: incbin "backgrounds/data.bin"
+    incsrc "temp/box_index.asm"
+    incsrc "temp/command_index.asm"
     incsrc "temp/font_index.asm"
     incsrc "temp/font_data.asm"
     
@@ -14,7 +16,6 @@ freecode
 
     incsrc "code/font.asm"
     incsrc "code/header.asm"
-    incsrc "code/command.asm"
     incsrc "code/tilemap.asm"
     incsrc "code/layer.asm"
     incsrc "code/char.asm"
@@ -24,3 +25,6 @@ freecode
     incsrc "code/wrap.asm"
     incsrc "code/util.asm"
     incsrc "code/thread.asm"
+    
+    incsrc "temp/box_code.asm"
+    incsrc "temp/command_code.asm"

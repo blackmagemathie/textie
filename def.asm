@@ -57,6 +57,9 @@
         !textie_line_flag_in_lead   = $10 ; set if in leading spaces
         !textie_line_flag_autofill  = $08 ; enable auto background fill
 
+; box
+    !textie_box_id = $352a ; (1) id
+
 ; caret
     !textie_caret_pos_fill     = $352b ; next screen x position to trigger background fill.
     !textie_caret_pos_screen_x = $352c ; position, x.

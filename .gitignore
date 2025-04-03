@@ -1,11 +1,13 @@
 icon.ico
 desktop.ini
 
+list/
 temp/*
 scripts/__pycache__/
 scripts/.dependencies
 
-list/
 fonts/*
 headers/*
+boxes/*
+
 frames/*

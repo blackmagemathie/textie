@@ -27,7 +27,7 @@ def list_command():
     with open(fp_temp_index,"w") as fio_temp_index, open(fp_temp_code,"w") as fio_temp_code:
 
         temp_index = (
-            "fillbyte $00\n"
+            "freedata\n"
         )
         fio_temp_index.write(temp_index)
 
@@ -83,7 +83,7 @@ def list_command():
         for index_label in index_labels:
 
             temp_index = (
-                "index_{label}:\n"
+                "command_index_{label}:\n"
                 "db {values}\n"
             ).format(
                 label = index_label,
