@@ -24,12 +24,9 @@ init:
     +
     nop
 
-    ; jsr layer_lm_preserve
-    ; jsr layer_lm_set
-
-    ; set thread option (test)
-    lda #$c0
-    sta.w !textie_thread_option
+    ; set thread flags (test)
+    lda.b #(!textie_thread_flag_chain_commands+!textie_thread_flag_chain_spaces)
+    sta.w !textie_thread_flags
 
     ; enter "box draw"
     lda.b #!textie_state_id_box_draw

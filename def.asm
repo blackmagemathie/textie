@@ -14,13 +14,12 @@
     !textie_layer_backup_lm  = $35d0   ; backup of layer 3 image behavior set in lm ($13 bytes).
 
 ; thread
-    !textie_thread_id     = $3500 ; id
-    !textie_thread_wait   = $3501 ; wait timer, in frames
-    !textie_thread_state  = $3502 ; state
-    !textie_thread_option = $3511 ; format : csi-----
-                                  ; c = chain commands.
-                                  ; s = chain spaces.
-                                  ; i = waiting for input.
+    !textie_thread_id    = $3500 ; id
+    !textie_thread_wait  = $3501 ; wait timer, in frames
+    !textie_thread_state = $3502 ; state
+    !textie_thread_flags = $3511 ; format :
+        !textie_thread_flag_chain_commands = %10000000 ; chain commands
+        !textie_thread_flag_chain_spaces = %01000000 ; chain spaces
 
 ; nmi
     !textie_nmi_flags = $3503 ; format:
@@ -39,9 +38,9 @@
 ; message
     !textie_message_pointer = $3512 ; (3) pointer
     !textie_message_pos_gfx = $3515 ; (2) gfx pos
-    !textie_message_pos_screen_x = $3517 ; screen position, x.
-    !textie_message_pos_screen_y = $3518 ;                  y.
-    !textie_message_pos_col      = $3519 ;                  col.
+    !textie_message_pos_screen_x = $3517 ; screen position, x
+    !textie_message_pos_screen_y = $3518 ;                  y
+    !textie_message_pos_col      = $3519 ;                  col
 
 ; header
     !textie_header_pointer = $351b ; (3) pointer

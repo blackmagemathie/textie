@@ -52,11 +52,12 @@ normal:
         sep #$20
 
         ; chain if possible
-        lda !textie_thread_option
-        bpl +
-        lda.l command_index_flag,x
-        bit #$01
-        bne .readChar
+        lda.w !textie_thread_flags
+        bit.b #!textie_thread_flag_chain_commands
+        beq +
+            lda.l command_index_flag,x
+            bit #$01
+            bne .readChar
         +
 
         rts
@@ -104,10 +105,10 @@ normal:
         trb.w !textie_line_option
 
         ; chain if possible
-        lda !textie_thread_option
-        and #$40
+        lda.w !textie_thread_flags
+        bit.b #!textie_thread_flag_chain_spaces
         beq +
-        jmp .readChar
+            jmp .readChar
         +
 
         rts
