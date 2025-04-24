@@ -9,5 +9,5 @@ scripts/.dependencies
 fonts/*
 headers/*
 boxes/*
-
+messages/*
 frames/*

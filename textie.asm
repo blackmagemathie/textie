@@ -9,6 +9,7 @@ freedata
     incsrc "temp/command_index.asm"
     incsrc "temp/font_index.asm"
     incsrc "temp/font_data.asm"
+    incsrc "messages/all.asm"
     
 freecode
     

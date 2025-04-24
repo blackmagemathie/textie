@@ -1,4 +1,6 @@
-
+macro textie_font_use(name)
+    incsrc "./fonts/<name>/table.asm"
+endmacro
 
 ; tilemap ($800 bytes)
     !textie_tilemap      = $423800
@@ -34,6 +36,7 @@
     !textie_state_id_wait_input = $05
     !textie_state_id_box_draw = $06
     !textie_state_id_box_erase = $07
+    !textie_state_id_run_message = $08
 
 ; message
     !textie_message_pointer = $3512 ; (3) pointer
@@ -105,6 +108,9 @@
     !textie_sfx_option     = $355f ; format : d--eeeee
                                    ; d = if set, disable all sounds.
                                    ; e = enable sounds, 0 to 4.
+
+; message
+    !textie_message_id = $3560
 
 ; arg
     !textie_arg_pos_gfx = $35f0 ; (2) gfx pos

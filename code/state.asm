@@ -9,6 +9,7 @@ namespace state
         dw wait_input ; 05
         dw box_draw ; 06
         dw box_erase ; 07
+        dw run_message ; 08
         
     incsrc "states/none.asm"
     incsrc "states/init.asm"
@@ -18,5 +19,6 @@ namespace state
     incsrc "states/wait input.asm"
     incsrc "states/box draw.asm"
     incsrc "states/box erase.asm"
+    incsrc "states/run message.asm"
 
 namespace off
