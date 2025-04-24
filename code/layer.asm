@@ -5,22 +5,22 @@ lm_preserve:
     ; ----------------
 
     rep #$20
-    lda $22 : sta !textie_layer_backup_lm+$00
-    lda $24 : sta !textie_layer_backup_lm+$02
-    lda $1458|!addr : sta !textie_layer_backup_lm+$04
-    lda $145a|!addr : sta !textie_layer_backup_lm+$06
-    lda $145c|!addr : sta !textie_layer_backup_lm+$0e
+    lda $22 : sta.w !textie_layer_backup_lm+$00
+    lda $24 : sta.w !textie_layer_backup_lm+$02
+    lda $1458|!addr : sta.w !textie_layer_backup_lm+$04
+    lda $145a|!addr : sta.w !textie_layer_backup_lm+$06
+    lda $145c|!addr : sta.w !textie_layer_backup_lm+$0e
     sep #$20
-    lda $40 : sta !textie_layer_backup_lm+$08
-    lda $5b : sta !textie_layer_backup_lm+$09
-    lda $145f|!addr : sta !textie_layer_backup_lm+$0a
-    lda $145e|!addr : sta !textie_layer_backup_lm+$0b
-    lda $1be3|!addr : sta !textie_layer_backup_lm+$0c
-    lda $1403|!addr : sta !textie_layer_backup_lm+$0d
-    lda $1460|!addr : sta !textie_layer_backup_lm+$10
-    lda $13d5|!addr : sta !textie_layer_backup_lm+$11
-    lda $3e : sta !textie_layer_backup_lm+$12
-    lda $0d9d|!addr : sta !textie_layer_backup_lm+$13
+    lda $40 : sta.w !textie_layer_backup_lm+$08
+    lda $5b : sta.w !textie_layer_backup_lm+$09
+    lda $145f|!addr : sta.w !textie_layer_backup_lm+$0a
+    lda $145e|!addr : sta.w !textie_layer_backup_lm+$0b
+    lda $1be3|!addr : sta.w !textie_layer_backup_lm+$0c
+    lda $1403|!addr : sta.w !textie_layer_backup_lm+$0d
+    lda $1460|!addr : sta.w !textie_layer_backup_lm+$10
+    lda $13d5|!addr : sta.w !textie_layer_backup_lm+$11
+    lda $3e : sta.w !textie_layer_backup_lm+$12
+    lda $0d9d|!addr : sta.w !textie_layer_backup_lm+$13
 
     rts
 
@@ -74,22 +74,22 @@ lm_restore:
     ; ----------------
 
     rep #$20
-    lda !textie_layer_backup_lm+$00 : sta $22
-    lda !textie_layer_backup_lm+$02 : sta $24
-    lda !textie_layer_backup_lm+$04 : sta $1458|!addr
-    lda !textie_layer_backup_lm+$06 : sta $145a|!addr
-    lda !textie_layer_backup_lm+$0e : sta $145c|!addr
+    lda.w !textie_layer_backup_lm+$00 : sta $22
+    lda.w !textie_layer_backup_lm+$02 : sta $24
+    lda.w !textie_layer_backup_lm+$04 : sta $1458|!addr
+    lda.w !textie_layer_backup_lm+$06 : sta $145a|!addr
+    lda.w !textie_layer_backup_lm+$0e : sta $145c|!addr
     sep #$20
-    lda !textie_layer_backup_lm+$08 : sta $40
-    lda !textie_layer_backup_lm+$09 : sta $5b
-    lda !textie_layer_backup_lm+$0a : sta $145f|!addr
-    lda !textie_layer_backup_lm+$0b : sta $145e|!addr
-    lda !textie_layer_backup_lm+$0c : sta $1be3|!addr
-    lda !textie_layer_backup_lm+$0d : sta $1403|!addr
-    lda !textie_layer_backup_lm+$10 : sta $1460|!addr
-    lda !textie_layer_backup_lm+$11 : sta $13d5|!addr
-    lda !textie_layer_backup_lm+$12 : sta $3e
-    lda !textie_layer_backup_lm+$13 : sta $0d9d|!addr
+    lda.w !textie_layer_backup_lm+$08 : sta $40
+    lda.w !textie_layer_backup_lm+$09 : sta $5b
+    lda.w !textie_layer_backup_lm+$0a : sta $145f|!addr
+    lda.w !textie_layer_backup_lm+$0b : sta $145e|!addr
+    lda.w !textie_layer_backup_lm+$0c : sta $1be3|!addr
+    lda.w !textie_layer_backup_lm+$0d : sta $1403|!addr
+    lda.w !textie_layer_backup_lm+$10 : sta $1460|!addr
+    lda.w !textie_layer_backup_lm+$11 : sta $13d5|!addr
+    lda.w !textie_layer_backup_lm+$12 : sta $3e
+    lda.w !textie_layer_backup_lm+$13 : sta $0d9d|!addr
     lda.b #!textie_nmi_flag_update_main_screen
     tsb.w !textie_nmi_flags
     rts
@@ -102,7 +102,7 @@ vram_transfer:
     ; !textie_arg_tile_counter (2) -> how many 8x8 tiles to transfer.
     ; ----------------
     ; get qutie index.
-    ldy !qutie_index
+    ldy.w !qutie_index
 
     ; adjust sas mapping.
     lda.b #!qutie_queue_page
@@ -116,7 +116,7 @@ vram_transfer:
 
     ; set source.
     rep #$20
-    lda !textie_arg_pos_gfx
+    lda.w !textie_arg_pos_gfx
     asl #3
     pha
     asl
@@ -131,7 +131,7 @@ vram_transfer:
 
     ; set transfer size.
     rep #$20
-    lda !textie_arg_tile_counter
+    lda.w !textie_arg_tile_counter
     asl #4
     sep #$20
     sta.w !qutie_size_lo,y
@@ -153,7 +153,7 @@ vram_transfer:
     stz $318f
 
     ; update qutie index.
-    inc !qutie_index
+    inc.w !qutie_index
 
     rts
 
