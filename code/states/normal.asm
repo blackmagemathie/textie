@@ -72,7 +72,6 @@ normal:
 
         ; move caret
         lda !textie_space_regular
-        sta !textie_arg_move
         jsr util_moveCaret
 
         ; word wrap enabled?
@@ -331,7 +330,6 @@ normal:
             lda !textie_char_width
             clc
             adc !textie_space_postchar
-            sta !textie_arg_move
             jsr util_moveCaret
 
         ..finish:

@@ -114,6 +114,5 @@
     !textie_arg_tile_counter = $35f7 ; (2) how many tiles to process
     !textie_arg_quarter         = $35f9 ; which part of layer 3 to upload tilemap to.
     !textie_arg_rows            = $35fa ; -
-    !textie_arg_move            = $35fb ; -
     !textie_arg_width           = $35fc ; -
     !textie_command_abs = $35fd ; (2) absolute addr of command to jump to

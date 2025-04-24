@@ -3,10 +3,9 @@ namespace util
 moveCaret:
     ; moves caret within line.
     ; ----------------
-    ; !textie_arg_move <- horizontal movement (in px, signed).
+    ; A (1) <- horizontal movement (in px, signed)
     ; ----------------
 
-    lda.w !textie_arg_move
     clc
     adc.w !textie_caret_pos_col
     sta.w !textie_caret_pos_col
