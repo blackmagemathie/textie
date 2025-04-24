@@ -22,6 +22,10 @@
                                   ; s = chain spaces.
                                   ; i = waiting for input.
 
+; nmi
+    !textie_nmi_flags = $3501 ; format:
+        !textie_nmi_flag_update_main_screen = $01 ; update main screen using $0d9d
+
 ; state ids
     !textie_state_id_none = $00
     !textie_state_id_init = $01

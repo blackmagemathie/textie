@@ -15,6 +15,7 @@ freecode
     namespace nested on
 
     incsrc "code/font.asm"
+    incsrc "code/nmi.asm"
     incsrc "code/header.asm"
     incsrc "code/tilemap.asm"
     incsrc "code/layer.asm"
