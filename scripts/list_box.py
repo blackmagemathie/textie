@@ -13,7 +13,14 @@ def list_box():
     fp_temp_code  = ".."+sep+"temp"+sep+"box_code.asm"
     deps = []
 
-    index_labels = ["init","exit","draw","erase"]
+    index_labels = [
+        "draw_init",
+        "draw_main",
+        "clear_init",
+        "clear_main",
+        "erase_init",
+        "erase_main",
+    ]
 
     # convert list
     testfile(fp_list)

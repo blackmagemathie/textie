@@ -34,9 +34,14 @@ endmacro
     !textie_state_id_exit = $03
     !textie_state_id_wait_frames = $04
     !textie_state_id_wait_input = $05
-    !textie_state_id_box_draw = $06
-    !textie_state_id_box_erase = $07
-    !textie_state_id_run_message = $08
+    !textie_state_id_run_message = $06
+    ; / $07
+    !textie_state_id_box_draw_init = $08
+    !textie_state_id_box_draw_main = $09
+    !textie_state_id_box_clear_init = $0a
+    !textie_state_id_box_clear_main = $0b
+    !textie_state_id_box_erase_init = $0c
+    !textie_state_id_box_erase_main = $0d
 
 ; message
     !textie_message_pointer = $3512 ; (3) pointer

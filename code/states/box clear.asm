@@ -1,11 +1,11 @@
-box_erase:
+box_clear:
 
     .init:
         lda.w !textie_box_id
         asl
         tax
         rep #$20
-        lda.l box_index_erase_init,x
+        lda.l box_index_clear_init,x
         sta.w !textie_command_abs
         sep #$20
         pea.w +
@@ -13,8 +13,8 @@ box_erase:
         +
         nop
         
-        ; enter "box erase main"
-        lda.b #!textie_state_id_box_erase_main
+        ; enter "box clear main"
+        lda.b #!textie_state_id_box_clear_main
         sta.w !textie_thread_state
         
         rts
@@ -24,7 +24,7 @@ box_erase:
         asl
         tax
         rep #$20
-        lda.l box_index_erase_main,x
+        lda.l box_index_clear_main,x
         sta.w !textie_command_abs
         sep #$20
         pea.w +
@@ -32,9 +32,9 @@ box_erase:
         +
         nop
         
-        ; enter "exit" if carry set
+        ; enter "normal" if carry set
         bcc +
-        lda.b #!textie_state_id_exit
+        lda.b #!textie_state_id_normal
         sta.w !textie_thread_state
         +
 

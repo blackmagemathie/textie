@@ -11,25 +11,12 @@ init:
     ; run header
     jsr header_run
 
-    ; run box init
-    lda.w !textie_box_id
-    asl
-    tax
-    rep #$20
-    lda.l box_index_init,x
-    sta.w !textie_command_abs
-    sep #$20
-    pea.w +
-    jmp.w (!textie_command_abs)
-    +
-    nop
-
     ; set thread flags (test)
     lda.b #(!textie_thread_flag_chain_commands+!textie_thread_flag_chain_spaces)
     sta.w !textie_thread_flags
 
-    ; enter "box draw"
-    lda.b #!textie_state_id_box_draw
+    ; enter "box draw init"
+    lda.b #!textie_state_id_box_draw_init
     sta.w !textie_thread_state
 
     rts
