@@ -14,16 +14,16 @@
     !textie_layer_backup_lm  = $35d0   ; backup of layer 3 image behavior set in lm ($13 bytes).
 
 ; thread
-    !textie_thread_id     = $3500 ; id.
-    !textie_thread_wait   = $350f ; wait timer, in frames.
-    !textie_thread_state  = $3510 ; state.
+    !textie_thread_id     = $3500 ; id
+    !textie_thread_wait   = $3501 ; wait timer, in frames
+    !textie_thread_state  = $3502 ; state
     !textie_thread_option = $3511 ; format : csi-----
                                   ; c = chain commands.
                                   ; s = chain spaces.
                                   ; i = waiting for input.
 
 ; nmi
-    !textie_nmi_flags = $3501 ; format:
+    !textie_nmi_flags = $3503 ; format:
         !textie_nmi_flag_update_main_screen = $01 ; update main screen using $0d9d
 
 ; state ids
@@ -33,6 +33,8 @@
     !textie_state_id_exit = $03
     !textie_state_id_wait_frames = $04
     !textie_state_id_wait_input = $05
+    !textie_state_id_box_draw = $06
+    !textie_state_id_box_erase = $07
 
 ; message
     !textie_message_pointer = $3512 ; (3) pointer

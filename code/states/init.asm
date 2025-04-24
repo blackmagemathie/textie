@@ -31,8 +31,8 @@ init:
     lda #$c0
     sta.w !textie_thread_option
 
-    ; set state to "normal"
-    lda.b #!textie_state_id_normal
+    ; enter "box draw"
+    lda.b #!textie_state_id_box_draw
     sta.w !textie_thread_state
 
     rts

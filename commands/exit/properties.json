@@ -1,6 +1,6 @@
 {
     "name": "exit",
-    "about": "properly closes box, then terminates thread.",
+    "about": "properly exits thread.",
 
     "chainable": false,
     "wrap": "end",
